@@ -1,0 +1,19 @@
+   @Test
+    void getPostsSortedByDateTest() {
+        Fundraiser fundraiser = new Fundraiser("klay", "klay@gmail.com", "klay");
+        fundraiserService.createFundraiserProfile(fundraiser);
+
+        Post postVal1 = new Post("Post 1", "Description", "category1", LocalDate.of(2024, 02, 25), LocalDate.of(2024, 04, 20), 200000.0, 0.0, "completed", fundraiser);
+        Post postVal2 = new Post("Post 2", "Description", "category2", LocalDate.of(2024, 02, 27), LocalDate.of(2024, 04, 22), 200000.0, 0.0, "completed", fundraiser);
+
+        postService.addNewPost(postVal1);
+        postService.addNewPost(postVal2);
+
+        List<Post> postsSortedByDate = postService.getPostsSortedByDate();
+
+        assertEquals(2, postsSortedByDate.size());
+        assertTrue(postsSortedByDate.get(0).getStartDate().isAfter(postsSortedByDate.get(1).getStartDate()));
+
+        postRepositoryDao.deleteAll();
+        fundraiserRepositoryDao.deleteAll();
+    }

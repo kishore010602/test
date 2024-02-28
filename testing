@@ -35,6 +35,20 @@
             newPost2=postService.addNewPost(postVal2);
         }catch(PostExceptions e){
             throw new RuntimeException(e);
+`      
+         List<Post> sortedPosts;
+    try {
+        sortedPosts = postService.getPostsSortedByDate();
+    } catch (PostExceptions e) {
+        throw new RuntimeException(e);
+    }
+
+    
+    for (int i = 0; i < sortedPosts.size() - 1; i++) {
+        LocalDate currentPostDate = sortedPosts.get(i).getStartDate();
+        LocalDate nextPostDate = sortedPosts.get(i + 1).getStartDate();
+        Assertions.assertTrue(currentPostDate.compareTo(nextPostDate) <= 0);
+    }
         
 
         

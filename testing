@@ -4,8 +4,8 @@
 > Task :compileTestJava
 > Task :processTestResources NO-SOURCE
 > Task :testClasses
-09:20:20.913 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.company.fundraisedemo.post.PostServiceImplTest]: PostServiceImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-09:20:20.958 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.company.fundraisedemo.FundraiseDemoApplication for test class org.company.fundraisedemo.post.PostServiceImplTest
+09:26:54.423 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.company.fundraisedemo.post.PostServiceImplTest]: PostServiceImplTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+09:26:54.485 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.company.fundraisedemo.FundraiseDemoApplication for test class org.company.fundraisedemo.post.PostServiceImplTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -15,23 +15,23 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.2)
 
-2024-02-28T09:20:21.096+05:30  INFO 24141 --- [    Test worker] o.c.f.post.PostServiceImplTest           : Starting PostServiceImplTest using Java 17.0.10 with PID 24141 (started by kr52 in /Users/kr52/Fundraise-app)
-2024-02-28T09:20:21.097+05:30  INFO 24141 --- [    Test worker] o.c.f.post.PostServiceImplTest           : No active profile set, falling back to 1 default profile: "default"
-2024-02-28T09:20:21.385+05:30  INFO 24141 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2024-02-28T09:20:21.416+05:30  INFO 24141 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 4 JPA repository interfaces.
-2024-02-28T09:20:21.586+05:30  INFO 24141 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2024-02-28T09:20:21.606+05:30  INFO 24141 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
-2024-02-28T09:20:21.618+05:30  INFO 24141 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2024-02-28T09:20:21.705+05:30  INFO 24141 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2024-02-28T09:20:21.716+05:30  INFO 24141 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2024-02-28T09:20:21.802+05:30  INFO 24141 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/demodb user=SA
-2024-02-28T09:20:21.804+05:30  INFO 24141 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2024-02-28T09:20:21.814+05:30  WARN 24141 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2024-02-28T09:20:22.191+05:30  INFO 24141 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2024-02-28T09:20:22.205+05:30  INFO 24141 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2024-02-28T09:20:22.455+05:30  WARN 24141 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2024-02-28T09:20:22.887+05:30  INFO 24141 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/demodb'
-2024-02-28T09:20:22.915+05:30  INFO 24141 --- [    Test worker] o.c.f.post.PostServiceImplTest           : Started PostServiceImplTest in 1.904 seconds (process running for 2.349)
+2024-02-28T09:26:54.607+05:30  INFO 24325 --- [    Test worker] o.c.f.post.PostServiceImplTest           : Starting PostServiceImplTest using Java 17.0.10 with PID 24325 (started by kr52 in /Users/kr52/Fundraise-app)
+2024-02-28T09:26:54.608+05:30  INFO 24325 --- [    Test worker] o.c.f.post.PostServiceImplTest           : No active profile set, falling back to 1 default profile: "default"
+2024-02-28T09:26:54.922+05:30  INFO 24325 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-28T09:26:54.952+05:30  INFO 24325 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 26 ms. Found 4 JPA repository interfaces.
+2024-02-28T09:26:55.107+05:30  INFO 24325 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-28T09:26:55.124+05:30  INFO 24325 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-02-28T09:26:55.135+05:30  INFO 24325 --- [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-02-28T09:26:55.210+05:30  INFO 24325 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-28T09:26:55.220+05:30  INFO 24325 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-02-28T09:26:55.310+05:30  INFO 24325 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/demodb user=SA
+2024-02-28T09:26:55.310+05:30  INFO 24325 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-02-28T09:26:55.321+05:30  WARN 24325 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-28T09:26:55.681+05:30  INFO 24325 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-28T09:26:55.696+05:30  INFO 24325 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-28T09:26:55.922+05:30  WARN 24325 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-28T09:26:56.422+05:30  INFO 24325 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/demodb'
+2024-02-28T09:26:56.462+05:30  INFO 24325 --- [    Test worker] o.c.f.post.PostServiceImplTest           : Started PostServiceImplTest in 1.914 seconds (process running for 2.464)
 Hibernate: 
     select
         p1_0.id,
@@ -96,16 +96,6 @@ Hibernate:
         id=?
 Hibernate: 
     select
-        f1_0.id,
-        f1_0.email,
-        f1_0.name,
-        f1_0.password 
-    from
-        fundraiser f1_0 
-    where
-        f1_0.email=?
-Hibernate: 
-    select
         next value for fundraiser_seq
 Hibernate: 
     insert 
@@ -149,18 +139,18 @@ Hibernate:
     where
         f1_0.id=?
 
-Expected :org.company.fundraisedemo.post.Post@112d8c18
-Actual   :org.company.fundraisedemo.post.Post@7b13ae73
+Expected :org.company.fundraisedemo.post.Post@76a13b12
+Actual   :org.company.fundraisedemo.post.Post@66b9f727
 <Click to see difference>
 
-org.opentest4j.AssertionFailedError: expected: <org.company.fundraisedemo.post.Post@112d8c18> but was: <org.company.fundraisedemo.post.Post@7b13ae73>
+org.opentest4j.AssertionFailedError: expected: <org.company.fundraisedemo.post.Post@76a13b12> but was: <org.company.fundraisedemo.post.Post@66b9f727>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
 	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
 	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
 	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at org.company.fundraisedemo.post.PostServiceImplTest.getPostByIdTest(PostServiceImplTest.java:219)
+	at org.company.fundraisedemo.post.PostServiceImplTest.getPostByIdTest(PostServiceImplTest.java:214)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -248,13 +238,13 @@ org.opentest4j.AssertionFailedError: expected: <org.company.fundraisedemo.post.P
 
 
 Java HotSpot(TM) 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-Failed to map supported failure 'org.opentest4j.AssertionFailedError: expected: <org.company.fundraisedemo.post.Post@112d8c18> but was: <org.company.fundraisedemo.post.Post@7b13ae73>' with mapper 'org.gradle.api.internal.tasks.testing.failure.mappers.OpenTestAssertionFailedMapper@58192546': Cannot invoke "Object.getClass()" because "expectedValue" is null
-2024-02-28T09:20:23.336+05:30  INFO 24141 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2024-02-28T09:20:23.338+05:30  INFO 24141 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2024-02-28T09:20:23.339+05:30  INFO 24141 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+Failed to map supported failure 'org.opentest4j.AssertionFailedError: expected: <org.company.fundraisedemo.post.Post@76a13b12> but was: <org.company.fundraisedemo.post.Post@66b9f727>' with mapper 'org.gradle.api.internal.tasks.testing.failure.mappers.OpenTestAssertionFailedMapper@148c571c': Cannot invoke "Object.getClass()" because "expectedValue" is null
+2024-02-28T09:26:56.868+05:30  INFO 24325 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-02-28T09:26:56.869+05:30  INFO 24325 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-02-28T09:26:56.870+05:30  INFO 24325 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 > Task :test
 PostServiceImplTest > getPostByIdTest() FAILED
-    org.opentest4j.AssertionFailedError at PostServiceImplTest.java:219
+    org.opentest4j.AssertionFailedError at PostServiceImplTest.java:214
 1 test completed, 1 failed
 > Task :test FAILED
 FAILURE: Build failed with an exception.
@@ -266,6 +256,6 @@ Execution failed for task ':test'.
 Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
 You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
 For more on this, please refer to https://docs.gradle.org/8.5/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
-BUILD FAILED in 3s
+BUILD FAILED in 4s
 4 actionable tasks: 2 executed, 2 up-to-date
 

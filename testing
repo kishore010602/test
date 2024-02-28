@@ -1,32 +1,33 @@
 @Test
-    void getPostByIdTest() {
-        postRepositoryDao.deleteAll();
-        fundraiserRepositoryDao.deleteAll();
-        Fundraiser fundraiser = new Fundraiser("Test Fundraiser", "test@example.com", "password");
-        try {
-            fundraiserService.createFundraiserProfile(fundraiser);
-        } catch (FundraiserExceptions e) {
-            throw new RuntimeException(e);
-        }
-
-        Post post = new Post("Test Post", "Description", "category", LocalDate.now(), LocalDate.now(), 1000.0, 0.0, "completed", fundraiser);
-        Post savedPost;
-        try {
-            savedPost = postService.addNewPost(post);
-        } catch (PostExceptions e) {
-            throw new RuntimeException(e);
-        }
-
-        List<Post> foundPosts;
-        try {
-            foundPosts = postService.getPostById(savedPost.getId());
-        } catch (PostExceptions e) {
-            throw new RuntimeException(e);
-        }
-
-        Assertions.assertEquals(1, foundPosts.size());
-        Assertions.assertEquals(savedPost, foundPosts.get(0));
-        postRepositoryDao.delete(savedPost);
-        fundraiserRepositoryDao.delete(fundraiser);
-
+void getPostByIdTest() {
+    postRepositoryDao.deleteAll();
+    fundraiserRepositoryDao.deleteAll();
+    Fundraiser fundraiser = new Fundraiser("Test Fundraiser", "test@example.com", "password");
+    try {
+        fundraiserService.createFundraiserProfile(fundraiser);
+    } catch (FundraiserExceptions e) {
+        throw new RuntimeException(e);
     }
+
+    Post post = new Post("Test Post", "Description", "category", LocalDate.now(), LocalDate.now(), 1000.0, 0.0, "completed", fundraiser);
+    Post savedPost;
+    try {
+        savedPost = postService.addNewPost(post);
+    } catch (PostExceptions e) {
+        throw new RuntimeException(e);
+    }
+
+    List<Post> foundPosts;
+    try {
+        foundPosts = postService.getPostById(savedPost.getId());
+    } catch (PostExceptions e) {
+        throw new RuntimeException(e);
+    }
+
+    Assertions.assertEquals(1, foundPosts.size());
+    Assertions.assertEquals(savedPost, foundPosts.get(0));
+
+    // Clean up
+    postRepositoryDao.delete(savedPost);
+    fundraiserRepositoryDao.delete(fundraiser);
+}

@@ -1,27 +1,28 @@
+kr52@MGC1VH49C39C Fundraise-app % git commit -m "TestCasesAdded"
+Author identity unknown
 
- @Test
-    void getIncompletePostsTest() {
-        Fundraiser fundraiser = new Fundraiser("klay","klay@gmail.com","klay");
-        fundraiserRepositoryDao.save(fundraiser);
+*** Please tell me who you are.
 
-        Post incompletePost = new Post("Title1", "Description1", "Category1", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10), 100.0, 50.0, "incomplete", fundraiser);
-        Post completePost = new Post("Title2", "Description2", "Category2", LocalDate.of(2024, 2, 1), LocalDate.of(2024, 2, 10), 200.0, 100.0, "completed", fundraiser);
-        postRepositoryDao.save(incompletePost);
-        postRepositoryDao.save(completePost);
+Run
 
-        List<Post> incompletePosts = null;
-        try {
-            incompletePosts = postService.getIncompletePosts();
-        } catch (PostExceptions e) {
-            throw new RuntimeException(e);
-        }
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
 
-        System.out.println("Incomplete Posts: " + incompletePosts);
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
 
-        Assertions.assertNotNull(incompletePosts);
-        Assertions.assertEquals(1, incompletePosts.size(), "Expected only one incomplete post");
+fatal: unable to auto-detect email address (got 'kr52@MGC1VH49C39C.(none)')
+kr52@MGC1VH49C39C Fundraise-app % git commit -m "TestCasesAdded"
+Author identity unknown
 
-        postRepositoryDao.delete(incompletePost);
-        postRepositoryDao.delete(completePost);
-        fundraiserRepositoryDao.delete(fundraiser);
-    }
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'kr52@MGC1VH49C39C.(none)')

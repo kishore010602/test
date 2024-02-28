@@ -4,31 +4,26 @@ import org.junit.jupiter.api.Assertions;
 public class PostServiceImplTest {
 
     @Test
-    void getPostsByTitleTest() {
-        // Create a test fundraiser
+    void getPostsByCategoryTest() {
         Fundraiser fundraiser = new Fundraiser("klay","klay@gmail.com","klay");
         fundraiserRepositoryDao.save(fundraiser);
 
-        // Create test posts
         Post post1 = new Post("Title1", "Description1", "Category1", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10), 100.0, 50.0, "status1", fundraiser);
         Post post2 = new Post("Title2", "Description2", "Category2", LocalDate.of(2024, 2, 1), LocalDate.of(2024, 2, 10), 200.0, 100.0, "status2", fundraiser);
         postRepositoryDao.save(post1);
         postRepositoryDao.save(post2);
 
-        // Call the service method to get posts by title
         List<Post> posts = null;
         try {
-            posts = postService.getPostsByTitle("Title1");
+            posts = postService.getPostsByCategory("Category1");
         } catch (PostExceptions e) {
             throw new RuntimeException(e);
         }
 
-        // Assertions
         Assertions.assertNotNull(posts);
         Assertions.assertEquals(1, posts.size());
-        Assertions.assertEquals("Title1", posts.get(0).getTitle());
+        Assertions.assertEquals("Category1", posts.get(0).getCategory());
 
-        // Clean up: delete the test posts and fundraiser from the database
         postRepositoryDao.delete(post1);
         postRepositoryDao.delete(post2);
         fundraiserRepositoryDao.delete(fundraiser);

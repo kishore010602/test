@@ -1,57 +1,34 @@
-   @Test
-    void getPostsSortedByDateTest() {
-        Fundraiser fundraiser = new Fundraiser("klay", "klay@gmail.com", "klay");
-        fundraiserService.createFundraiserProfile(fundraiser);
-
-        Post postVal1 = new Post("Post 1", "Description", "category1", LocalDate.of(2024, 02, 25), LocalDate.of(2024, 04, 20), 200000.0, 0.0, "completed", fundraiser);
-        Post postVal2 = new Post("Post 2", "Description", "category2", LocalDate.of(2024, 02, 27), LocalDate.of(2024, 04, 22), 200000.0, 0.0, "completed", fundraiser);
-
-        postService.addNewPost(postVal1);
-        postService.addNewPost(postVal2);
-
-        List<Post> postsSortedByDate = postService.getPostsSortedByDate();
-
-        assertEquals(2, postsSortedByDate.size());
-        assertTrue(postsSortedByDate.get(0).getStartDate().isAfter(postsSortedByDate.get(1).getStartDate()));
-
-        postRepositoryDao.deleteAll();
-        fundraiserRepositoryDao.deleteAll();
+@Test
+void getPostsSortedByDateTest() {
+    Fundraiser fundraiser1 = new Fundraiser("klay", "klay@gmail.com", "klay");
+    Fundraiser fundraiser2 = new Fundraiser("tay", "tay@gmail.com", "tay");
+    try {
+        fundraiserService.createFundraiserProfile(fundraiser1);
+        fundraiserService.createFundraiserProfile(fundraiser2);
+    } catch (FundraiserExceptions e) {
+        throw new RuntimeException(e);
     }
- @Test
-    void getPostsSortedByDateTest() {
-        Post newPost1,newPost2;
-        Fundraiser fundraiser1 = new Fundraiser("klay", "klay@gmail.com", "klay");
-        Fundraiser fundraiser2 = new Fundraiser("tay", "tay@gmail.com", "tay");
-        try{
-            fundraiserService.createFundraiserProfile(fundraiser1);
-            fundraiserService.createFundraiserProfile(fundraiser2);
-        } catch(FundraiserExceptions e){
-            throw new RuntimeException(e);
-        }
-        Post postVal1 = new Post("Post 1", "Description", "category1", LocalDate.of(2024, 02, 25), LocalDate.of(2024, 04, 20), 200000.0, 0.0, "completed", fundraiser);
-        Post postVal2 = new Post("Post 2", "Description", "category2", LocalDate.of(2024, 02, 27), LocalDate.of(2024, 04, 22), 200000.0, 0.0, "completed", fundraiser);
-        try{
-            newPost1=postService.addNewPost(postVal1);
-            newPost2=postService.addNewPost(postVal2);
-        }catch(PostExceptions e){
-            throw new RuntimeException(e);
-`      
-         List<Post> sortedPosts;
+    
+    Post postVal1 = new Post("Post 1", "Description", "category1", LocalDate.of(2024, 02, 25), LocalDate.of(2024, 04, 20), 200000.0, 0.0, "completed", fundraiser1);
+    Post postVal2 = new Post("Post 2", "Description", "category2", LocalDate.of(2024, 02, 27), LocalDate.of(2024, 04, 22), 200000.0, 0.0, "completed", fundraiser2);
+    Post newPost1, newPost2;
+    try {
+        newPost1 = postService.addNewPost(postVal1);
+        newPost2 = postService.addNewPost(postVal2);
+    } catch (PostExceptions e) {
+        throw new RuntimeException(e);
+    }
+
+    List<Post> sortedPosts;
     try {
         sortedPosts = postService.getPostsSortedByDate();
     } catch (PostExceptions e) {
         throw new RuntimeException(e);
     }
 
-    
     for (int i = 0; i < sortedPosts.size() - 1; i++) {
         LocalDate currentPostDate = sortedPosts.get(i).getStartDate();
         LocalDate nextPostDate = sortedPosts.get(i + 1).getStartDate();
-        Assertions.assertTrue(currentPostDate.compareTo(nextPostDate) <= 0);
+        Assertions.assertTrue(currentPostDate.compareTo(nextPostDate) >= 0, "Posts are not sorted by date in descending order");
     }
-        
-
-        
-
-        
-    }
+}

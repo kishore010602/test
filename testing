@@ -4,25 +4,25 @@ import org.junit.jupiter.api.Assertions;
 public class PostServiceImplTest {
 
     @Test
-    void getPostsByCategoryTest() {
+    void getCompletedPostsTest() {
         Fundraiser fundraiser = new Fundraiser("klay","klay@gmail.com","klay");
         fundraiserRepositoryDao.save(fundraiser);
 
-        Post post1 = new Post("Title1", "Description1", "Category1", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10), 100.0, 50.0, "status1", fundraiser);
-        Post post2 = new Post("Title2", "Description2", "Category2", LocalDate.of(2024, 2, 1), LocalDate.of(2024, 2, 10), 200.0, 100.0, "status2", fundraiser);
+        Post post1 = new Post("Title1", "Description1", "Category1", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 1, 10), 100.0, 50.0, "completed", fundraiser);
+        Post post2 = new Post("Title2", "Description2", "Category2", LocalDate.of(2024, 2, 1), LocalDate.of(2024, 2, 10), 200.0, 100.0, "incomplete", fundraiser);
         postRepositoryDao.save(post1);
         postRepositoryDao.save(post2);
 
-        List<Post> posts = null;
+        List<Post> completedPosts = null;
         try {
-            posts = postService.getPostsByCategory("Category1");
+            completedPosts = postService.getCompletedPosts();
         } catch (PostExceptions e) {
             throw new RuntimeException(e);
         }
 
-        Assertions.assertNotNull(posts);
-        Assertions.assertEquals(1, posts.size());
-        Assertions.assertEquals("Category1", posts.get(0).getCategory());
+        Assertions.assertNotNull(completedPosts);
+        Assertions.assertEquals(1, completedPosts.size());
+        Assertions.assertEquals("completed", completedPosts.get(0).getStatus());
 
         postRepositoryDao.delete(post1);
         postRepositoryDao.delete(post2);

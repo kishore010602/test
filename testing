@@ -1,24 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+// Assuming you have PostService.spec.ts and Post.ts
+
+import { TestBed, async } from '@angular/core/testing';
+import { PostsComponent } from './posts.component';
 import { PostService } from '../post.service'; // Import PostService
 import { Post } from './post'; // Import Post model
 
-@Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
-})
-export class PostsComponent implements OnInit {
+describe('PostsComponent', () => {
+  let component: PostsComponent;
+  let fixture: TestBed.createComponent<PostsComponent>;
+  let postService: PostService;
 
-  posts: Post[] = [];
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ PostsComponent ],
+      providers: [ PostService ]
+    })
+    .compileComponents();
+  }));
 
-  constructor(private postService: PostService) { }
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PostsComponent);
+    component = fixture.componentInstance;
+    postService = TestBed.inject(PostService);
+    fixture.detectChanges();
+  });
 
-  ngOnInit(): void {
-    this.getPosts(); // Fetch posts on initialization
-  }
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-  getPosts(): void {
-    this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-}
+  // Add test cases for component behavior here:
+  // * test getPosts functionality (data fetching)
+  // * test display of post data in template
+  // * (optional) test button click behavior
+});

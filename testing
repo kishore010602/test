@@ -1,1 +1,36 @@
-Cannot access 'TestBed.createComponent' because 'TestBed' is a type, but not a namespace. Did you mean to retrieve the type of the property 'createComponent' in 'TestBed' with 'TestBed["createComponent"]'?ts(2713)
+// Assuming you have PostService.spec.ts and Post.ts
+
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { PostsComponent } from './posts.component';
+import { PostService } from '../post.service'; // Import PostService
+import { Post } from './post'; // Import Post model
+
+describe('PostsComponent', () => {
+  let component: PostsComponent;
+  let fixture: ComponentFixture<PostsComponent>;
+  let postService: PostService;
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      declarations: [ PostsComponent ],
+      providers: [ PostService ]
+    })
+    .compileComponents(); // Compile components asynchronously
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PostsComponent); // Use TestBed.createComponent
+    component = fixture.componentInstance;
+    postService = TestBed.inject(PostService);
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  // Add test cases for component behavior here:
+  // * test getPosts functionality (data fetching)
+  // * test display of post data in template
+  // * (optional) test button click behavior
+});

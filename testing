@@ -1,51 +1,42 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { PostService } from './post.service';
+export class Post {
+  constructor(
+    public id?: number,
+    public title?: string,
+    public description?: string,
+    public category?: string,
+    public startDate?: Date,
+    public endDate?: Date,
+    public amountRequested?: number,
+    public amountCollected?: number,
+    public status?: string,
+    public donationAccountId?: string,
+    public fundraiser?: Fundraiser,
+    public donations?: Payment[],
+    public comments?: Comment[]
+  ) {}
+}
 
-describe('PostService', () => {
-  let service: PostService;
-  let httpMock: HttpTestingController;
+export class Fundraiser {
+  constructor(
+    public id?: number,
+    public name?: string,
+    public email?: string
+  ) {}
+}
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [PostService]
-    });
-    service = TestBed.inject(PostService);
-    httpMock = TestBed.inject(HttpTestingController);
-  });
+export class Payment {
+  constructor(
+    public id?: number,
+    public amount?: number,
+    public date?: Date
+  ) {}
+}
 
-  afterEach(() => {
-    httpMock.verify();
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should retrieve all posts', () => {
-    const mockPosts = [{ id: 1, title: 'Test Post', description: 'This is a test post' }];
-
-    service.getAllPosts().subscribe(posts => {
-      expect(posts.length).toBe(1);
-      expect(posts).toEqual(mockPosts);
-    });
-
-    const req = httpMock.expectOne('http://localhost:8090/AllPosts');
-    expect(req.request.method).toBe('GET');
-    req.flush(mockPosts);
-  });
-
-  it('should add a new post', () => {
-    const mockNewPost = { id: 2, title: 'New Post', description: 'This is a new post' };
-
-    service.addNewPost(mockNewPost).subscribe(response => {
-      expect(response).toBeTruthy();
-    });
-
-    const req = httpMock.expectOne('http://localhost:8090/post');
-    expect(req.request.method).toBe('POST');
-    expect(req.request.body).toEqual(mockNewPost);
-    req.flush({});
-  });
-});
+export class Comment {
+  constructor(
+    public id?: number,
+    public content?: string,
+    public author?: string,
+    public date?: Date
+  ) {}
+}

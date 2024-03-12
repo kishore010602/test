@@ -1,50 +1,52 @@
-<!-- Display Existing Posts -->
-<div *ngIf="posts.length > 0">
-  <h2>Existing Posts</h2>
-  <ul>
-    <li *ngFor="let post of posts">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.description }}</p>
-      <p>Category: {{ post.category }}</p>
-      <p>Start Date: {{ post.startDate }}</p>
-      <p>End Date: {{ post.endDate }}</p>
-      <p>Amount Requested: {{ post.amountRequested }}</p>
-      <p>Status: {{ post.status }}</p>
-      <!-- Add more details as needed -->
-    </li>
-  </ul>
-</div>
-<div *ngIf="posts.length === 0">
-  <p>No posts available.</p>
-</div>
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-<!-- Form to Add New Post -->
-<h2>Add New Post</h2>
-<form (submit)="addPost()">
-  <label for="title">Title:</label>
-  <input type="text" id="title" name="title" [(ngModel)]="newPost.title" required>
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+  constructor(private httpClient: HttpClient) { }
 
-  <label for="description">Description:</label>
-  <textarea id="description" name="description" [(ngModel)]="newPost.description" required></textarea>
+  createPost(postData: any): Observable<any> {
+    return this.httpClient.post('http://localhost:8090/post', postData);
+  }
+}
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { PostService } from './post.service';
 
-  <label for="category">Category:</label>
-  <input type="text" id="category" name="category" [(ngModel)]="newPost.category" required>
+describe('PostService', () => {
+  let service: PostService;
+  let httpMock: HttpTestingController;
 
-  <!-- Add more fields for other post properties -->
-  
-  <label for="startDate">Start Date:</label>
-  <input type="date" id="startDate" name="startDate" [(ngModel)]="newPost.startDate" required>
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [PostService]
+    });
+    service = TestBed.inject(PostService);
+    httpMock = TestBed.inject(HttpTestingController);
+  });
 
-  <label for="endDate">End Date:</label>
-  <input type="date" id="endDate" name="endDate" [(ngModel)]="newPost.endDate" required>
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-  <label for="amountRequested">Amount Requested:</label>
-  <input type="number" id="amountRequested" name="amountRequested" [(ngModel)]="newPost.amountRequested" required>
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 
-  <label for="status">Status:</label>
-  <input type="text" id="status" name="status" [(ngModel)]="newPost.status" required>
-  
-  <!-- Add more fields as needed -->
+  it('should send a POST request to create a new post', () => {
+    const postData = { /* Provide sample post data here */ };
 
-  <button type="submit">Add Post</button>
-</form>
+    service.createPost(postData).subscribe(response => {
+      expect(response).toBeDefined();
+      // Add more expectations if needed
+    });
+
+    const req = httpMock.expectOne('http://localhost:8090/post');
+    expect(req.request.method).toBe('POST');
+    // Add more expectations for request data if needed
+  });
+});

@@ -1,20 +1,24 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../post.service'; // Import PostService
+import { Post } from './post'; // Import Post model
 
-import { PostService } from './post.service';
+@Component({
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
 
-describe('PostService', () => {
-  let service: PostService;
+  posts: Post[] = [];
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [PostService]
-    });
-    service = TestBed.inject(PostService);
-  });
+  constructor(private postService: PostService) { }
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+  ngOnInit(): void {
+    this.getPosts(); // Fetch posts on initialization
+  }
+
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+}

@@ -1,36 +1,10 @@
-// Assuming you have PostService.spec.ts and Post.ts
-
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { PostsComponent } from './posts.component';
-import { PostService } from '../post.service'; // Import PostService
-import { Post } from './post'; // Import Post model
-
-describe('PostsComponent', () => {
-  let component: PostsComponent;
-  let fixture: ComponentFixture<PostsComponent>;
-  let postService: PostService;
-
-  beforeEach(async () => {
-    TestBed.configureTestingModule({
-      declarations: [ PostsComponent ],
-      providers: [ PostService ]
-    })
-    .compileComponents(); // Compile components asynchronously
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PostsComponent); // Use TestBed.createComponent
-    component = fixture.componentInstance;
-    postService = TestBed.inject(PostService);
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  // Add test cases for component behavior here:
-  // * test getPosts functionality (data fetching)
-  // * test display of post data in template
-  // * (optional) test button click behavior
-});
+<div class="post-list">
+  <div *ngFor="let post of posts">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description }}</p>
+    <p>Category: {{ post.category }}</p>
+    <p>Start Date: {{ post.startDate | date }}</p> <p>End Date: {{ post.endDate | date }}</p>
+    <p>Amount Requested: {{ post.amountRequested }}</p>
+    <p>Amount Collected: {{ post.amountCollected }}</p>
+    <button>Donate</button> </div>
+</div>

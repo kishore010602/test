@@ -1,10 +1,2 @@
-<div class="post-list">
-  <div *ngFor="let post of posts">
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.description }}</p>
-    <p>Category: {{ post.category }}</p>
-    <p>Start Date: {{ post.startDate | date }}</p> <p>End Date: {{ post.endDate | date }}</p>
-    <p>Amount Requested: {{ post.amountRequested }}</p>
-    <p>Amount Collected: {{ post.amountCollected }}</p>
-    <button>Donate</button> </div>
-</div>
+No pipe found with name 'date'.ngtsc(-998004)
+posts.component.ts(7, 57): Error occurs in the template of component PostsComponent.

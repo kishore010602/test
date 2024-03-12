@@ -1,42 +1,15 @@
-export class Post {
-  constructor(
-    public id?: number,
-    public title?: string,
-    public description?: string,
-    public category?: string,
-    public startDate?: Date,
-    public endDate?: Date,
-    public amountRequested?: number,
-    public amountCollected?: number,
-    public status?: string,
-    public donationAccountId?: string,
-    public fundraiser?: Fundraiser,
-    public donations?: Payment[],
-    public comments?: Comment[]
-  ) {}
-}
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Post } from './post';
 
-export class Fundraiser {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public email?: string
-  ) {}
-}
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
 
-export class Payment {
-  constructor(
-    public id?: number,
-    public amount?: number,
-    public date?: Date
-  ) {}
-}
+  constructor(private http: HttpClient) { }
 
-export class Comment {
-  constructor(
-    public id?: number,
-    public content?: string,
-    public author?: string,
-    public date?: Date
-  ) {}
-}
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/post/AllPosts'); // Adjust URL as needed
+  }

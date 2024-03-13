@@ -1,17 +1,168 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { RouterLinkActive } from '@angular/router';
+[ERROR] TS2339: Property 'getPostById' does not exist on type 'PostService'. [plugin angular-compiler]
 
-@Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet,FormsModule,CommonModule,RouterLink,RouterLinkActive],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
-})
-export class AppComponent {
-  title = 'fundraise-app';
-}
+    src/app/components/posts/posts.component.ts:28:21:
+      28 │     this.postService.getPostById(postId)
+         ╵                      ~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'post' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:29:17:
+      29 │       .subscribe(post => {
+         ╵                  ~~~~
+
+
+✘ [ERROR] TS2339: Property 'getPostsSortedByDate' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:35:21:
+      35 │     this.postService.getPostsSortedByDate()
+         ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:36:17:
+      36 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+✘ [ERROR] TS2339: Property 'getCompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:46:21:
+      46 │     this.postService.getCompletedPosts()
+         ╵                      ~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:47:17:
+      47 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+✘ [ERROR] TS2339: Property 'getIncompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:53:21:
+      53 │     this.postService.getIncompletedPosts()
+         ╵                      ~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:54:17:
+      54 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+⠙ Changes detected. Rebuilding...
+✘ [ERROR] TS2339: Property 'getPostById' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:28:21:
+      28 │     this.postService.getPostById(postId)
+         ╵                      ~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'post' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:29:17:
+      29 │       .subscribe(post => {
+         ╵                  ~~~~
+
+
+✘ [ERROR] TS2339: Property 'getPostsSortedByDate' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:35:21:
+      35 │     this.postService.getPostsSortedByDate()
+         ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:36:17:
+      36 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+✘ [ERROR] TS2339: Property 'getCompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:46:21:
+      46 │     this.postService.getCompletedPosts()
+         ╵                      ~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:47:17:
+      47 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+✘ [ERROR] TS2339: Property 'getIncompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:53:21:
+      53 │     this.postService.getIncompletedPosts()
+         ╵                      ~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:54:17:
+      54 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+⠋ Changes detected. Rebuilding...
+✘ [ERROR] TS2339: Property 'getPostById' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:28:21:
+      28 │     this.postService.getPostById(postId)
+         ╵                      ~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'post' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:29:17:
+      29 │       .subscribe(post => {
+         ╵                  ~~~~
+
+
+✘ [ERROR] TS2339: Property 'getPostsSortedByDate' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:35:21:
+      35 │     this.postService.getPostsSortedByDate()
+         ╵                      ~~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:36:17:
+      36 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+✘ [ERROR] TS2339: Property 'getCompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:46:21:
+      46 │     this.postService.getCompletedPosts()
+         ╵                      ~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:47:17:
+      47 │       .subscribe(posts => {
+         ╵                  ~~~~~
+
+
+✘ [ERROR] TS2339: Property 'getIncompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:53:21:
+      53 │     this.postService.getIncompletedPosts()
+         ╵                      ~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.ts:54:17:
+      54 │       .subscribe(posts => {
+         ╵                  ~~~~~

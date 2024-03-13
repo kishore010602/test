@@ -1,20 +1,35 @@
 <div>
     <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length<1">
-        No Products found! </h6>
+    <h6 *ngIf="posts.length < 1">
+        No Products found!
+    </h6>
 
-    <table *ngIf="posts.length>0">
+    <table *ngIf="posts.length > 0">
         <tr>
             <th>ID no</th>
             <th>Title</th>
-            <th>Price</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Amount Requested</th>
+            <th>Amount Collected</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
-        <tr *ngFor="let post of posts;let i = index">
-            <td>{{post.id}}</td>
-            <td>{{post.title}}</td>
-            <td>{{post.description}}</td>
-            
+        <tr *ngFor="let post of posts; let i = index">
+            <td>{{ post.id }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.description }}</td>
+            <td>{{ post.category }}</td>
+            <td>{{ post.startDate }}</td>
+            <td>{{ post.endDate }}</td>
+            <td>{{ post.amountRequested }}</td>
+            <td>{{ post.amountCollected }}</td>
+            <td>{{ post.status }}</td>
+            <td>
+                <!-- Define actions here -->
+            </td>
         </tr>
     </table>
 </div>

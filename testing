@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../model/post';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
@@ -11,8 +10,6 @@ import { Observable } from 'rxjs';
 export class PostsComponent implements OnInit {
 
   posts: Post[] = [];
-  sortedPosts: Post[] = [];
-  sortCriteria: string = '';
 
   constructor(private postService: PostService) { }
 
@@ -24,28 +21,13 @@ export class PostsComponent implements OnInit {
     this.postService.getAllPosts()
       .subscribe(posts => {
         this.posts = posts;
-        this.sortedPosts = [...this.posts];
       });
-  }
-
-  sortByTitle(): void {
-    this.sortCriteria = 'title';
-    this.sortedPosts.sort((a, b) => a.title.localeCompare(b.title));
   }
 
   getPostById(postId: number): void {
     this.postService.getPostById(postId)
       .subscribe(post => {
         this.posts = post;
-        this.sortedPosts = [...this.posts];
-      });
-  }
-
-  getPostsByTitle(title: string): void {
-    this.postService.getPostsByTitle(title)
-      .subscribe(posts => {
-        this.posts = posts;
-        this.sortedPosts = [...this.posts];
       });
   }
 
@@ -53,15 +35,17 @@ export class PostsComponent implements OnInit {
     this.postService.getPostsSortedByDate()
       .subscribe(posts => {
         this.posts = posts;
-        this.sortedPosts = [...this.posts];
       });
+  }
+
+  getAllPosts(): void {
+    this.getPosts();
   }
 
   getCompletedPosts(): void {
     this.postService.getCompletedPosts()
       .subscribe(posts => {
         this.posts = posts;
-        this.sortedPosts = [...this.posts];
       });
   }
 
@@ -69,15 +53,44 @@ export class PostsComponent implements OnInit {
     this.postService.getIncompletedPosts()
       .subscribe(posts => {
         this.posts = posts;
-        this.sortedPosts = [...this.posts];
-      });
-  }
-
-  getPostsByCategory(category: string): void {
-    this.postService.getPostsByCategory(category)
-      .subscribe(posts => {
-        this.posts = posts;
-        this.sortedPosts = [...this.posts];
       });
   }
 }
+<div>
+  <!-- Input field and button to get post by ID -->
+  <input type="number" [(ngModel)]="postId" placeholder="Enter Post ID">
+  <button (click)="getPostById()">Get Post by ID</button>
+
+  <!-- Input field and button to get posts by category -->
+  <input type="text" [(ngModel)]="category" placeholder="Enter Category">
+  <button (click)="getPostsByCategory()">Get Posts by Category</button>
+
+  <!-- Input field and button to get posts by title -->
+  <input type="text" [(ngModel)]="title" placeholder="Enter Title">
+  <button (click)="getPostsByTitle()">Get Posts by Title</button>
+
+  <!-- Buttons for other sorting methods -->
+  <button (click)="getAllPosts()">Get All Posts</button>
+  <button (click)="getPostsSortedByDate()">Get Posts Sorted by Date</button>
+  <button (click)="getCompletedPosts()">Get Completed Posts</button>
+  <button (click)="getIncompletedPosts()">Get Incompleted Posts</button>
+</div>
+
+<div>
+  <!-- Display the list of posts -->
+  <h3>Available Posts:</h3>
+  <h6 *ngIf="posts.length === 0">No Posts found!</h6>
+  
+  <div class="post-grid" *ngIf="posts.length > 0">
+    <div class="post-box" *ngFor="let post of posts">
+      <h4>ID: {{ post.id }}</h4>
+      <p><strong>Title:</strong> {{ post.title }}</p>
+      <p><strong>Category:</strong> {{ post.category }}</p>
+      <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+      <p><strong>End Date:</strong> {{ post.endDate }}</p>
+      <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+      <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+      <p><strong>Status:</strong> {{ post.status }}</p>
+    </div>
+  </div>
+</div>

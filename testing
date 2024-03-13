@@ -1,45 +1,16 @@
-<div>
-    <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length < 1">
-        No Products found!
-    </h6>
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Post } from '../model/post';
 
-    <div class="post-grid" *ngIf="posts.length > 0">
-        <div class="post-box" *ngFor="let post of posts">
-            <h4>ID: {{ post.id }}</h4>
-            <p><strong>Title:</strong> {{ post.title }}</p>
-            <p><strong>Category:</strong> {{ post.category }}</p>
-            <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-            <p><strong>End Date:</strong> {{ post.endDate }}</p>
-            <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-            <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-            <p><strong>Status:</strong> {{ post.status }}</p>
-            <button (click)="showDetails(post)">More Details</button>
-        </div>
-    </div>
-</div>
-.post-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
 
-.post-box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-}
+  constructor(private http: HttpClient) { }
 
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #0056b3;
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); // Adjust URL as needed
+  }
 }

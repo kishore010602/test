@@ -1,37 +1,20 @@
 <div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">
-      No Products found!
-  </h6>
+    <h3>Available Posts:</h3>
+    <h6 *ngIf="posts.length < 1">
+        No Products found!
+    </h6>
 
-  <table *ngIf="posts.length > 0">
-      <thead>
-          <tr>
-              <th>ID no</th>
-              <th>Title</th>
-           
-              <th>Category  </th>
-              <th>Start Date  </th>
-              <th>End Date  </th>
-              <th>Amount Requested  </th>
-              <th>Amount Collected  </th>
-              <th>Status  </th>
-              
-          </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let post of posts; let i = index">
-              <td style="text-align: center;">{{ post.id }}</td>
-              <td style="text-align: center;">{{ post.title }}</td>
-             
-              <td style="text-align: center;">{{ post.category }}</td>
-              <td style="text-align: center;">{{ post.startDate }}</td>
-              <td style="text-align: center;">{{ post.endDate }}</td>
-              <td style="text-align: center;">{{ post.amountRequested }}</td>
-              <td style="text-align: center;">{{ post.amountCollected }}</td>
-              <td style="text-align: center;">{{ post.status }}</td>
-              
-          </tr>
-      </tbody>
-  </table>
+    <div class="card-container" *ngIf="posts.length > 0">
+        <div class="card" *ngFor="let post of posts; let i = index">
+            <h4>ID: {{ post.id }}</h4>
+            <p><strong>Title:</strong> {{ post.title }}</p>
+            <p><strong>Category:</strong> {{ post.category }}</p>
+            <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+            <p><strong>End Date:</strong> {{ post.endDate }}</p>
+            <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+            <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+            <p><strong>Status:</strong> {{ post.status }}</p>
+            <button (click)="showDetails(post)">More Details</button>
+        </div>
+    </div>
 </div>

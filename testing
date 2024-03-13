@@ -1,39 +1,37 @@
 <div>
-    <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length < 1">
-        No Products found!
-    </h6>
+  <h3>Available Posts:</h3>
+  <h6 *ngIf="posts.length < 1">
+      No Products found!
+  </h6>
 
-    <table *ngIf="posts.length > 0">
-        <thead>
-            <tr>
-                <th>ID no</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Amount Requested</th>
-                <th>Amount Collected</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let post of posts; let i = index">
-                <td style="text-align: center;">{{ post.id }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.description }}</td>
-                <td>{{ post.category }}</td>
-                <td>{{ post.startDate }}</td>
-                <td>{{ post.endDate }}</td>
-                <td>{{ post.amountRequested }}</td>
-                <td>{{ post.amountCollected }}</td>
-                <td>{{ post.status }}</td>
-                <td>
-                    <!-- Define actions here -->
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table *ngIf="posts.length > 0">
+      <thead>
+          <tr>
+              <th>ID no</th>
+              <th>Title</th>
+           
+              <th>Category  </th>
+              <th>Start Date  </th>
+              <th>End Date  </th>
+              <th>Amount Requested  </th>
+              <th>Amount Collected  </th>
+              <th>Status  </th>
+              
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let post of posts; let i = index">
+              <td style="text-align: center;">{{ post.id }}</td>
+              <td style="text-align: center;">{{ post.title }}</td>
+             
+              <td style="text-align: center;">{{ post.category }}</td>
+              <td style="text-align: center;">{{ post.startDate }}</td>
+              <td style="text-align: center;">{{ post.endDate }}</td>
+              <td style="text-align: center;">{{ post.amountRequested }}</td>
+              <td style="text-align: center;">{{ post.amountCollected }}</td>
+              <td style="text-align: center;">{{ post.status }}</td>
+              
+          </tr>
+      </tbody>
+  </table>
 </div>

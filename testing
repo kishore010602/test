@@ -1,47 +1,83 @@
-<div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">
-      No Products found!
-  </h6>
-
-  <div class="post-grid" *ngIf="posts.length > 0">
-      <div class="post-box" *ngFor="let post of posts">
-          <h4>ID: {{ post.id }}</h4>
-          <p><strong>Title:</strong> {{ post.title }}</p>
-          <p><strong>Category:</strong> {{ post.category }}</p>
-          <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-          <p><strong>End Date:</strong> {{ post.endDate }}</p>
-          <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-          <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-          <p><strong>Status:</strong> {{ post.status }}</p>
-          <button>More Details</button>
-      </div>
-  </div>
-</div>
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
-import { CommonModule } from '@angular/common';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../model/post';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-posts',standalone:true,
-  imports:[CommonModule],
+  selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
 
   posts: Post[] = [];
+  sortedPosts: Post[] = [];
+  sortCriteria: string = '';
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.getPosts(); // Fetch posts on initialization
+    this.getPosts();
   }
 
   getPosts(): void {
     this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts);
+      .subscribe(posts => {
+        this.posts = posts;
+        this.sortedPosts = [...this.posts];
+      });
+  }
+
+  sortByTitle(): void {
+    this.sortCriteria = 'title';
+    this.sortedPosts.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  getPostById(postId: number): void {
+    this.postService.getPostById(postId)
+      .subscribe(post => {
+        this.posts = post;
+        this.sortedPosts = [...this.posts];
+      });
+  }
+
+  getPostsByTitle(title: string): void {
+    this.postService.getPostsByTitle(title)
+      .subscribe(posts => {
+        this.posts = posts;
+        this.sortedPosts = [...this.posts];
+      });
+  }
+
+  getPostsSortedByDate(): void {
+    this.postService.getPostsSortedByDate()
+      .subscribe(posts => {
+        this.posts = posts;
+        this.sortedPosts = [...this.posts];
+      });
+  }
+
+  getCompletedPosts(): void {
+    this.postService.getCompletedPosts()
+      .subscribe(posts => {
+        this.posts = posts;
+        this.sortedPosts = [...this.posts];
+      });
+  }
+
+  getIncompletedPosts(): void {
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => {
+        this.posts = posts;
+        this.sortedPosts = [...this.posts];
+      });
+  }
+
+  getPostsByCategory(category: string): void {
+    this.postService.getPostsByCategory(category)
+      .subscribe(posts => {
+        this.posts = posts;
+        this.sortedPosts = [...this.posts];
+      });
   }
 }
-

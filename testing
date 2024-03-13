@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../model/post';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-posts',
@@ -8,8 +10,10 @@ import { Post } from '../../model/post';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-
   posts: Post[] = [];
+  postId: number;
+  category: string;
+  title: string;
 
   constructor(private postService: PostService) { }
 
@@ -24,10 +28,11 @@ export class PostsComponent implements OnInit {
       });
   }
 
-  getPostById(postId: number): void {
-    this.postService.getPostById(postId)
+  getPostById(): void {
+    this.posts = []; // Clear the posts array
+    this.postService.getPostById(this.postId)
       .subscribe(post => {
-        this.posts = post;
+        this.posts.push(post); // Assuming getPostById returns a single post
       });
   }
 
@@ -36,10 +41,6 @@ export class PostsComponent implements OnInit {
       .subscribe(posts => {
         this.posts = posts;
       });
-  }
-
-  getAllPosts(): void {
-    this.getPosts();
   }
 
   getCompletedPosts(): void {
@@ -55,7 +56,22 @@ export class PostsComponent implements OnInit {
         this.posts = posts;
       });
   }
+
+  getPostsByCategory(): void {
+    this.postService.getPostsByCategory(this.category)
+      .subscribe(posts => {
+        this.posts = posts;
+      });
+  }
+
+  getPostsByTitle(): void {
+    this.postService.getPostsByTitle(this.title)
+      .subscribe(posts => {
+        this.posts = posts;
+      });
+  }
 }
+
 <div>
   <!-- Input field and button to get post by ID -->
   <input type="number" [(ngModel)]="postId" placeholder="Enter Post ID">

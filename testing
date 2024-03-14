@@ -1,25 +1,24 @@
 <div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">
-      No Products found!
-  </h6>
+    <h3>Available Posts:</h3>
+    <h6 *ngIf="posts.length < 1">
+        No Products found!
+    </h6>
+    
+    <button (click)="getPosts()">All Posts </button>
+    <button (click)="getCompletePosts()">Completed Posts</button>
+    <button (click)="getIncompletedPosts()">Incomplete Posts</button>
   
-  <!-- Button to filter completed posts -->
-  <button (click)="getCompletePosts()">Completed Posts</button>
-  <!-- Button to filter incomplete posts -->
-  <button (click)="getIncompletePosts()">Incomplete Posts</button>
-
-  <div class="post-grid" *ngIf="posts.length > 0">
-      <div class="post-box" *ngFor="let post of posts">
-          <h4>ID: {{ post.id }}</h4>
-          <p><strong>Title:</strong> {{ post.title }}</p>
-          <p><strong>Category:</strong> {{ post.category }}</p>
-          <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-          <p><strong>End Date:</strong> {{ post.endDate }}</p>
-          <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-          <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-          <p><strong>Status:</strong> {{ post.status }}</p>
-          <button>More Details</button>
-      </div>
+    <div class="post-grid" *ngIf="posts.length > 0">
+        <div class="post-box" *ngFor="let post of posts">
+            <h4>ID: {{ post.id }}</h4>
+            <p><strong>Title:</strong> {{ post.title }}</p>
+            <p><strong>Category:</strong> {{ post.category }}</p>
+            <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+            <p><strong>End Date:</strong> {{ post.endDate }}</p>
+            <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+            <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+            <p><strong>Status:</strong> {{ post.status }}</p>
+            <button>More Details</button>
+        </div>
+    </div>
   </div>
-</div>

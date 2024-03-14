@@ -1,81 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
-import { CommonModule } from '@angular/common';
+<div>
+  <h3>Available Posts:</h3>
+  <h6 *ngIf="posts.length < 1">No Posts found!</h6>
 
-@Component({
-  selector: 'app-posts',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
-})
-export class PostsComponent implements OnInit {
+  <div class="filter-buttons">
+    <button (click)="getPostsByCategory('')">All Categories</button>
+    <button (click)="getPostsByCategory('Education')">Education</button>
+    <button (click)="getPostsByCategory('Medical')">Medical</button>
+    <button (click)="getPostsByCategory('Social')">Social</button>
+  </div>
 
-  posts: Post[] = [];
-  selectedCategory: string = ''; // Initialize selected category
-  selectedTitle: string = ''; // Initialize selected title
-  isSortedByDate: boolean = false; // Flag for sorting by date
-  isAscending: boolean = true; // Flag for sorting order (ascending/descending)
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="selectedTitle" placeholder="Search by Title">
+    <button (click)="getPostsByTitle(selectedTitle)">Search</button>
+  </div>
 
-  constructor(private postService: PostService) { }
+  <div class="sort-buttons">
+    <button (click)="getPostsSortedByDate()">Sort by Date ({{ isAscending ? 'Ascending' : 'Descending' }})</button>
+    <button *ngIf="!isSortedByDate" (click)="getPosts()">Clear Sorting</button>
+  </div>
 
-  ngOnInit(): void {
-    this.getPosts(); // Fetch all posts on initialization
-  }
-
-  getPosts(): void {
-    this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getPostsByCategory(category: string): void {
-    if (category) { // Handle empty category selection
-      this.postService.getPostsByCategory(category)
-        .subscribe(posts => this.posts = posts);
-    } else {
-      this.getPosts(); // Revert to all posts if category is empty
-    }
-    this.selectedCategory = category; // Update selected category
-  }
-
-  getPostById(postId: number): void {
-    this.postService.getPostById(postId)
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getPostsByTitle(title: string): void {
-    if (title) { // Handle empty title search
-      this.postService.getPostsByTitle(title)
-        .subscribe(posts => this.posts = posts);
-    } else {
-      this.getPosts(); // Revert to all posts if title is empty
-    }
-    this.selectedTitle = title; // Update selected title
-  }
-
-  getPostsSortedByDate(): void {
-    const sortOrder = this.isAscending ? 'asc' : 'desc'; // Determine sort order
-    this.postService.getPostsSortedByDate(sortOrder)
-      .subscribe(posts => this.posts = posts);
-    this.isSortedByDate = true; // Set sorting flag
-    this.isAscending = !this.isAscending; // Toggle sorting order
-  }
-
-  getCompletedPosts(): void {
-    this.postService.getCompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getIncompletedPosts(): void {
-    this.postService.getIncompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  clearFilters(): void {
-    this.getPosts(); // Revert to all posts
-    this.selectedCategory = '';
-    this.selectedTitle = '';
-    this.isSortedByDate = false;
-  }
-}
+  <div class="status-buttons">
+    <button (click)="getCompletedPosts()">Completed Posts</button>
+    <button (click)="

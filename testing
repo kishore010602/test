@@ -1,38 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
-import { CommonModule } from '@angular/common';
+<div>
+  <h3>Available Posts:</h3>
+  <h6 *ngIf="posts.length < 1">No Posts found!</h6>
 
-@Component({
-  selector: 'app-posts',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
-})
-export class PostsComponent implements OnInit {
+  <div class="status-buttons">
+    <button (click)="getPosts()">All Posts</button>
+    <button (click)="getCompletePosts()">Completed Posts</button>
+    <button (click)="getIncompletedPosts()">Incomplete Posts</button>
+  </div>
 
-  posts: Post[] = [];
-
-  constructor(private postService: PostService) { }
-
-  ngOnInit(): void {
-    // Initially fetch all posts on initialization
-    this.getPosts();
-  }
-
-  getPosts(): void {
-    this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getCompletePosts(): void { // Separate method for completed posts
-    this.postService.getCompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getIncompletedPosts(): void { // Separate method for incomplete posts
-    this.postService.getIncompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-}
+  <div class="post-grid" *ngIf="posts.length > 0">
+    <div class="post-box" *ngFor="let post of posts">
+      </div>
+  </div>
+</div>

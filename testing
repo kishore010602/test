@@ -1,3 +1,47 @@
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'; // Import PostService
+import { Post } from '../../model/post'; // Import Post model
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
+
+  posts: Post[] = [];
+  selectedCategory: string = ''; // Initialize selected category
+  selectedTitle: string = ''; // Initialize selected title
+  
+
+  constructor(private postService: PostService) { }
+
+  ngOnInit(): void {
+    this.getPosts(); // Fetch all posts on initialization'
+    this.getCompletedPosts();
+    this.getIncompletedPosts();
+  }
+ 
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+  getCompletedPosts(): void {
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getIncompletedPosts(): void {
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  
+}
+
 <div>
     <h3>Available Posts:</h3>
     <h6 *ngIf="posts.length < 1">No Posts found!</h6>

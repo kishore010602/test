@@ -1,86 +1,54 @@
+// post.component.ts
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
+import { PostService } from '../../services/post.service';
+import { Post } from '../../model/post';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-posts',standalone:true,
-  imports:[CommonModule],
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-
   posts: Post[] = [];
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.getPosts(); // Fetch posts on initialization
+    this.getPosts();
   }
 
   getPosts(): void {
     this.postService.getAllPosts()
       .subscribe(posts => this.posts = posts);
   }
-}
 
-<div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">
-      No Products found!
-  </h6>
-
-  <div class="post-grid" *ngIf="posts.length > 0">
-      <div class="post-box" *ngFor="let post of posts">
-          <h4>ID: {{ post.id }}</h4>
-          <p><strong>Title:</strong> {{ post.title }}</p>
-          <p><strong>Category:</strong> {{ post.category }}</p>
-          <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-          <p><strong>End Date:</strong> {{ post.endDate }}</p>
-          <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-          <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-          <p><strong>Status:</strong> {{ post.status }}</p>
-          <button>More Details</button>
-      </div>
-  </div>
-</div>
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Post } from '../model/post';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class PostService {
-
-  constructor(private http: HttpClient) { }
-
-  getAllPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); // Adjust URL as needed
-  }
-  getPostById(postId: number): Observable<Post[]> {
-    return this.http.get<Post[]>(`http://localhost:8090/post/'+ postId);
+  sortByDate(): void {
+    this.postService.getPostsSortedByDate()
+      .subscribe(posts => this.posts = posts);
   }
 
-  getPostsByTitle(title: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`http://localhost:8090/postByTitle/${title}`);
+  sortByTitle(): void {
+    // Assuming you have a method for sorting by title in your service
+    // Modify the service accordingly if not present
+    this.postService.getPostsSortedByTitle()
+      .subscribe(posts => this.posts = posts);
   }
 
-  getPostsSortedByDate(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/newestFirst');
+  sortByCategory(category: string): void {
+    this.postService.getPostsByCategory(category)
+      .subscribe(posts => this.posts = posts);
   }
 
-  getCompletedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/complete');
+  showCompletedPosts(): void {
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts);
   }
 
-  getIncompletedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/incomplete');
-  }
-
-  getPostsByCategory(category: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`http://localhost:8090/posts/${category}`);
+  showIncompletePosts(): void {
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts);
   }
 }

@@ -1,41 +1,25 @@
-<div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">No Posts found!</h6>
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
 
-  <div class="filter-buttons">
-    <button (click)="getPostsByCategory('')">All Categories</button>
-    <button (click)="getPostsByCategory('Education')">Education</button>
-    <button (click)="getPostsByCategory('Medical')">Medical</button>
-    <button (click)="getPostsByCategory('Social')">Social</button>
-  </div>
+.post-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
 
-  <div class="search-bar">
-    <input type="text" [(ngModel)]="selectedTitle" placeholder="Search by Title">
-    <button (click)="getPostsByTitle(selectedTitle)">Search</button>
-  </div>
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-  <div class="sort-buttons">
-    <button (click)="getPostsSortedByDate()">Sort by Date (Newest First)</button>
-    <button *ngIf="!isSortedByDate" (click)="getPosts()">Clear Sorting</button>
-  </div>
-
-  <div class="status-buttons">
-    <button (click)="getCompletedPosts()">Completed Posts</button>
-    <button (click)="getIncompletedPosts()">Incomplete Posts</button>
-    <button (click)="clearFilters()">Clear Filters</button>
-  </div>
-
-  <div class="post-grid" *ngIf="posts.length > 0">
-    <div class="post-box" *ngFor="let post of posts">
-      <h4>ID: {{ post.id }}</h4>
-      <p><strong>Title:</strong> {{ post.title }}</p>
-      <p><strong>Category:</strong> {{ post.category }}</p>
-      <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-      <p><strong>End Date:</strong> {{ post.endDate }}</p>
-      <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-      <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-      <p><strong>Status:</strong> {{ post.status }}</p>
-      <button>More Details</button>
-    </div>
-  </div>
-</div>
+button:hover {
+  background-color: #0056b3;
+}

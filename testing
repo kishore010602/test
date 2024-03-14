@@ -1,3 +1,12 @@
+<div>
+    <h3>Available Posts:</h3>
+    <h6 *ngIf="posts.length < 1">No Posts found!</h6>
+  
+    <div class="status-buttons">
+        <button (click)="getPosts()">All Posts</button>
+        <button (click)="getComplete()">Completed Posts</button>
+      <button (click)="getIncomplete()">Incomplete Posts</button>
+    </div>
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service'; // Import PostService
 import { Post } from '../../model/post'; // Import Post model
@@ -21,47 +30,47 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPosts(); // Fetch all posts on initialization'
-    this.getCompletedPosts();
-    this.getIncompletedPosts();
+    this.getComplete();
+    this.getIncomplete();
   }
  
   getPosts(): void {
     this.postService.getAllPosts()
       .subscribe(posts => this.posts = posts);
   }
-  getCompletedPosts(): void {
+  getComplete(): void {
     this.postService.getCompletedPosts()
       .subscribe(posts => this.posts = posts);
   }
 
-  getIncompletedPosts(): void {
+  getIncomplete(): void {
     this.postService.getIncompletedPosts()
       .subscribe(posts => this.posts = posts);
   }
 
   
-}
+}import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Post } from '../model/post';
 
-<div>
-    <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length < 1">No Posts found!</h6>
-  
-    <div class="status-buttons">
-      <button (click)="getCompletedPosts()">Completed Posts</button>
-      <button (click)="getIncompletedPosts()">Incomplete Posts</button>
-    </div>
-  
-    <div class="post-grid" *ngIf="posts.length > 0">
-      <div class="post-box" *ngFor="let post of posts">
-        <h4>ID: {{ post.id }}</h4>
-        <p><strong>Title:</strong> {{ post.title }}</p>
-        <p><strong>Category:</strong> {{ post.category }}</p>
-        <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-        <p><strong>End Date:</strong> {{ post.endDate }}</p>
-        <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-        <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-        <p><strong>Status:</strong> {{ post.status }}</p>
-        <button>More Details</button>
-      </div>
-    </div>
-</div>
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+
+  constructor(private http: HttpClient) { }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); 
+  }
+  getCompletedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/complete');
+  }
+
+  getIncompletedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/incomplete');
+  }
+
+ 
+}

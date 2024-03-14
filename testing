@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
+import { PostService } from '../../services/post.service';
+import { Post } from '../../model/post';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,9 +13,6 @@ import { CommonModule } from '@angular/common';
 export class PostsComponent implements OnInit {
 
   posts: Post[] = [];
-  selectedCategory: string = ''; // Initialize selected category
-  selectedTitle: string = ''; // Initialize selected title
-  
 
   constructor(private postService: PostService) { }
 
@@ -27,6 +24,7 @@ export class PostsComponent implements OnInit {
     this.postService.getAllPosts()
       .subscribe(posts => this.posts = posts);
   }
+
   getCompletedPosts(): void {
     this.postService.getCompletedPosts()
       .subscribe(posts => this.posts = posts);
@@ -36,6 +34,4 @@ export class PostsComponent implements OnInit {
     this.postService.getIncompletedPosts()
       .subscribe(posts => this.posts = posts);
   }
-
-  
 }

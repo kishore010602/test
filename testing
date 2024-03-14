@@ -4,6 +4,10 @@
       No Products found!
   </h6>
   
+  <!-- Button to filter completed posts -->
+  <button (click)="getCompletePosts()">Completed Posts</button>
+  <!-- Button to filter incomplete posts -->
+  <button (click)="getIncompletePosts()">Incomplete Posts</button>
 
   <div class="post-grid" *ngIf="posts.length > 0">
       <div class="post-box" *ngFor="let post of posts">
@@ -19,66 +23,3 @@
       </div>
   </div>
 </div>
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
-import { CommonModule } from '@angular/common';
-
-@Component({
-  selector: 'app-posts',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
-})
-export class PostsComponent implements OnInit {
-
-  posts: Post[] = [];
-
-  constructor(private postService: PostService) { }
-
-  ngOnInit(): void {
-    // Initially fetch all posts on initialization
-    this.getPosts();
-  }
-
-  getPosts(): void {
-    this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getCompletePosts(): void { // Separate method for completed posts
-    this.postService.getCompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getIncompletedPosts(): void { // Separate method for incomplete posts
-    this.postService.getIncompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-}
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Post } from '../model/post';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class PostService {
-
-  constructor(private http: HttpClient) { }
-
-  getAllPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); 
-  }
-  getCompletedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/complete');
-  }
-
-  getIncompletedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/incomplete');
-  }
-
- 
-}

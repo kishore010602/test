@@ -1,25 +1,81 @@
-✘ [ERROR] NG9: Property 'getCompletedPosts' does not exist on type 'PostsComponent'. [plugin angular-compiler]
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'; // Import PostService
+import { Post } from '../../model/post'; // Import Post model
+import { CommonModule } from '@angular/common';
 
-    src/app/components/posts/posts.component.html:19:23:
-      19 │       <button (click)="getCompletedPosts()">Completed Posts</button>
-         ╵                        ~~~~~~~~~~~~~~~~~
+@Component({
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
 
-  Error occurs in the template of component PostsComponent.
+  posts: Post[] = [];
+  selectedCategory: string = ''; // Initialize selected category
+  selectedTitle: string = ''; // Initialize selected title
+  isSortedByDate: boolean = false; // Flag for sorting by date
+  isAscending: boolean = true; // Flag for sorting order (ascending/descending)
 
-    src/app/components/posts/posts.component.ts:9:15:
-      9 │   templateUrl: './posts.component.html',
-        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~
+  constructor(private postService: PostService) { }
 
+  ngOnInit(): void {
+    this.getPosts(); // Fetch all posts on initialization
+  }
 
-✘ [ERROR] NG9: Property 'getIncompletedPosts' does not exist on type 'PostsComponent'. [plugin angular-compiler]
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
 
-    src/app/components/posts/posts.component.html:20:23:
-      20 │       <button (click)="getIncompletedPosts()">Incomplete Posts</bu...
-         ╵                        ~~~~~~~~~~~~~~~~~~~
+  getPostsByCategory(category: string): void {
+    if (category) { // Handle empty category selection
+      this.postService.getPostsByCategory(category)
+        .subscribe(posts => this.posts = posts);
+    } else {
+      this.getPosts(); // Revert to all posts if category is empty
+    }
+    this.selectedCategory = category; // Update selected category
+  }
 
-  Error occurs in the template of component PostsComponent.
+  getPostById(postId: number): void {
+    this.postService.getPostById(postId)
+      .subscribe(posts => this.posts = posts);
+  }
 
-    src/app/components/posts/posts.component.ts:9:15:
-      9 │   templateUrl: './posts.component.html',
-        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~
+  getPostsByTitle(title: string): void {
+    if (title) { // Handle empty title search
+      this.postService.getPostsByTitle(title)
+        .subscribe(posts => this.posts = posts);
+    } else {
+      this.getPosts(); // Revert to all posts if title is empty
+    }
+    this.selectedTitle = title; // Update selected title
+  }
 
+  getPostsSortedByDate(): void {
+    const sortOrder = this.isAscending ? 'asc' : 'desc'; // Determine sort order
+    this.postService.getPostsSortedByDate(sortOrder)
+      .subscribe(posts => this.posts = posts);
+    this.isSortedByDate = true; // Set sorting flag
+    this.isAscending = !this.isAscending; // Toggle sorting order
+  }
+
+  getCompletedPosts(): void {
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getIncompletedPosts(): void {
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  clearFilters(): void {
+    this.getPosts(); // Revert to all posts
+    this.selectedCategory = '';
+    this.selectedTitle = '';
+    this.isSortedByDate = false;
+  }
+}

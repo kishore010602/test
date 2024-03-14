@@ -1,41 +1,29 @@
 <div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">No Posts found!</h6>
-
-  <div class="filter-buttons">
-    <button (click)="getPostsByCategory('')">All Categories</button>
-    <button (click)="getPostsByCategory('Education')">Education</button>
-    <button (click)="getPostsByCategory('Medical')">Medical</button>
-    <button (click)="getPostsByCategory('Social')">Social</button>
-  </div>
-
-  <div class="search-bar">
-    <input type="text" [(ngModel)]="selectedTitle" placeholder="Search by Title">
-    <button (click)="getPostsByTitle(selectedTitle)">Search</button>
-  </div>
-
-  <div class="sort-buttons">
-    <button (click)="getPostsSortedByDate()">Sort by Date ({{ isAscending ? 'Ascending' : 'Descending' }})</button>
-    <button *ngIf="!isSortedByDate" (click)="getPosts()">Clear Sorting</button>
-  </div>
-
-  <div class="status-buttons">
-    <button (click)="getCompletedPosts()">Completed Posts</button>
-    <button (click)="getIncompletedPosts()">Incomplete Posts</button>
-    <button (click)="clearFilters()">Clear Filters</button>
-  </div>
-
-  <div class="post-grid" *ngIf="posts.length > 0">
-    <div class="post-box" *ngFor="let post of posts">
-      <h4>ID: {{ post.id }}</h4>
-      <p><strong>Title:</strong> {{ post.title }}</p>
-      <p><strong>Category:</strong> {{ post.category }}</p>
-      <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-      <p><strong>End Date:</strong> {{ post.endDate }}</p>
-      <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-      <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-      <p><strong>Status:</strong> {{ post.status }}</p>
-      <button>More Details</button>
+    <h3>Available Posts:</h3>
+    <h6 *ngIf="posts.length < 1">No Posts found!</h6>
+  
+  
+    
+  
+    
+  
+    <div class="status-buttons">
+      <button (click)="getCompletedPosts()">Completed Posts</button>
+      <button (click)="getIncompletedPosts()">Incomplete Posts</button>
+      <button (click)="clearFilters()">Clear Filters</button>
+    </div>
+  
+    <div class="post-grid" *ngIf="posts.length > 0">
+      <div class="post-box" *ngFor="let post of posts">
+        <h4>ID: {{ post.id }}</h4>
+        <p><strong>Title:</strong> {{ post.title }}</p>
+        <p><strong>Category:</strong> {{ post.category }}</p>
+        <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+        <p><strong>End Date:</strong> {{ post.endDate }}</p>
+        <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+        <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+        <p><strong>Status:</strong> {{ post.status }}</p>
+        <button>More Details</button>
+      </div>
     </div>
   </div>
-</div>

@@ -1,4 +1,13 @@
-Parser Error: Missing expected ) at column 35 in [getPostsByCategory(($event.target as HTMLInputElement).value)] in /Users/kr52/Library/CloudStorage/OneDrive-azureford/Desktop/AngularProj/Fundraiser-Frontend/src/app/components/posts/posts.component.html@12:65ngtsc(-995002)
-posts.component.ts(10, 27): Error occurs in the template of component PostsComponent.
-Parser Error: Unexpected token ')' at column 61 in [getPostsByCategory(($event.target as HTMLInputElement).value)] in /Users/kr52/Library/CloudStorage/OneDrive-azureford/Desktop/AngularProj/Fundraiser-Frontend/src/app/components/posts/posts.component.html@12:65ngtsc(-995002)
-posts.component.ts(10, 27): Error occurs in the template of component PostsComponent.
+ getPostsByTitle(event: any): void {
+    const title = event.target.value;
+    this.postService.getPostsByTitle(title)
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostById(event: any): void {
+    const postId = parseInt(event.target.value);
+    if (!isNaN(postId)) {
+      this.postService.getPostById(postId)
+        .subscribe(posts => this.posts = posts);
+    }
+  }

@@ -1,25 +1,78 @@
-.post-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'; // Import PostService
+import { Post } from '../../model/post'; // Import Post model
+import { CommonModule } from '@angular/common';
 
-.post-box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-}
+@Component({
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
 
-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-}
+  posts: Post[] = [];
+  selectedCategory: string = ''; // Initialize selected category
+  selectedTitle: string = ''; // Initialize selected title
+  isSortedByDate: boolean = false; // Flag for sorting by date
 
-button:hover {
-    background-color: #0056b3;
+  constructor(private postService: PostService) { }
+
+  ngOnInit(): void {
+    this.getPosts(); // Fetch posts on initialization
+  }
+
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostsByCategory(category: string): void {
+    if (category) { // Handle empty category selection
+      this.postService.getPostsByCategory(category)
+        .subscribe(posts => this.posts = posts);
+    } else {
+      this.getPosts(); // Revert to all posts if category is empty
+    }
+    this.selectedCategory = category; // Update selected category
+  }
+
+  getPostById(postId: number): void {
+    this.postService.getPostById(postId)
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostsByTitle(title: string): void {
+    if (title) { // Handle empty title search
+      this.postService.getPostsByTitle(title)
+        .subscribe(posts => this.posts = posts);
+    } else {
+      this.getPosts(); // Revert to all posts if title is empty
+    }
+    this.selectedTitle = title; // Update selected title
+  }
+
+  getPostsSortedByDate(): void {
+    this.postService.getPostsSortedByDate()
+      .subscribe(posts => this.posts = posts);
+    this.isSortedByDate = true; // Set sorting flag
+  }
+
+  getCompletedPosts(): void {
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getIncompletedPosts(): void {
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  clearFilters(): void {
+    this.getPosts(); // Revert to all posts
+    this.selectedCategory = '';
+    this.selectedTitle = '';
+    this.isSortedByDate = false;
+  }
 }

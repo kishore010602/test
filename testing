@@ -1,3 +1,4 @@
-  <input type="text" placeholder="Search by Category" (keyup)="getPostsByCategory(($event.target as HTMLInputElement).value)">
-    <input type="text" placeholder="Search by Title" (keyup)="getPostsByTitle(($event.target as HTMLInputElement).value)">
-    <input type="number" placeholder="Search by ID" (keyup)="getPostById(parseInt(($event.target as HTMLInputElement).value))">
+Parser Error: Missing expected ) at column 35 in [getPostsByCategory(($event.target as HTMLInputElement).value)] in /Users/kr52/Library/CloudStorage/OneDrive-azureford/Desktop/AngularProj/Fundraiser-Frontend/src/app/components/posts/posts.component.html@12:65ngtsc(-995002)
+posts.component.ts(10, 27): Error occurs in the template of component PostsComponent.
+Parser Error: Unexpected token ')' at column 61 in [getPostsByCategory(($event.target as HTMLInputElement).value)] in /Users/kr52/Library/CloudStorage/OneDrive-azureford/Desktop/AngularProj/Fundraiser-Frontend/src/app/components/posts/posts.component.html@12:65ngtsc(-995002)
+posts.component.ts(10, 27): Error occurs in the template of component PostsComponent.

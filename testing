@@ -1,12 +1,3 @@
-<div>
-    <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length < 1">No Posts found!</h6>
-  
-    <div class="status-buttons">
-        <button (click)="getPosts()">All Posts</button>
-        <button (click)="getComplete()">Completed Posts</button>
-      <button (click)="getIncomplete()">Incomplete Posts</button>
-    </div>
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service'; // Import PostService
 import { Post } from '../../model/post'; // Import Post model
@@ -22,55 +13,26 @@ import { CommonModule } from '@angular/common';
 export class PostsComponent implements OnInit {
 
   posts: Post[] = [];
-  selectedCategory: string = ''; // Initialize selected category
-  selectedTitle: string = ''; // Initialize selected title
-  
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    this.getPosts(); // Fetch all posts on initialization'
-    this.getComplete();
-    this.getIncomplete();
+    // Initially fetch all posts on initialization
+    this.getPosts();
   }
- 
+
   getPosts(): void {
     this.postService.getAllPosts()
       .subscribe(posts => this.posts = posts);
   }
-  getComplete(): void {
+
+  getCompletePosts(): void { // Separate method for completed posts
     this.postService.getCompletedPosts()
       .subscribe(posts => this.posts = posts);
   }
 
-  getIncomplete(): void {
+  getIncompletedPosts(): void { // Separate method for incomplete posts
     this.postService.getIncompletedPosts()
       .subscribe(posts => this.posts = posts);
   }
-
-  
-}import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Post } from '../model/post';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class PostService {
-
-  constructor(private http: HttpClient) { }
-
-  getAllPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); 
-  }
-  getCompletedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/complete');
-  }
-
-  getIncompletedPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>('http://localhost:8090/posts/incomplete');
-  }
-
- 
 }

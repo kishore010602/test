@@ -4,9 +4,11 @@
         No Products found!
     </h6>
     
-    <button (click)="getPosts()">All Posts </button>
-    <button (click)="getCompletePosts()">Completed Posts</button>
-    <button (click)="getIncompletedPosts()">Incomplete Posts</button>
+    <div class="button-container">
+        <button class="filter-button" (click)="getPosts()">All Posts</button>
+        <button class="filter-button" (click)="getCompletePosts()">Completed Posts</button>
+        <button class="filter-button" (click)="getIncompletedPosts()">Incomplete Posts</button>
+    </div>
   
     <div class="post-grid" *ngIf="posts.length > 0">
         <div class="post-box" *ngFor="let post of posts">
@@ -21,4 +23,23 @@
             <button>More Details</button>
         </div>
     </div>
-  </div>
+</div>
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #45a049;
+}

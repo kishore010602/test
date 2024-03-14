@@ -1,35 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service';
-import { Post } from '../../model/post';
-import { CommonModule } from '@angular/common';
-
-@Component({
-  selector: 'app-posts',
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
-})
-export class PostsComponent implements OnInit {
-
-  posts: Post[] = [];
-
-  constructor(private postService: PostService) { }
-
-  ngOnInit(): void {
-    this.getPosts(); // Fetch all posts on initialization
-  }
- 
-  getPosts(): void {
-    this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getCompletedPosts(): void {
-    this.postService.getCompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-
-  getIncompletedPosts(): void {
-    this.postService.getIncompletedPosts()
-      .subscribe(posts => this.posts = posts);
-  }
-}
+<div>
+    <h3>Available Posts:</h3>
+    <h6 *ngIf="posts.length < 1">No Posts found!</h6>
+  
+    <div class="status-buttons">
+      <button (click)="getCompletedPosts()">Completed Posts</button>
+      <button (click)="getIncompletedPosts()">Incomplete Posts</button>
+    </div>
+  
+    <div class="post-grid" *ngIf="posts.length > 0">
+      <div class="post-box" *ngFor="let post of posts">
+        <h4>ID: {{ post.id }}</h4>
+        <p><strong>Title:</strong> {{ post.title }}</p>
+        <p><strong>Category:</strong> {{ post.category }}</p>
+        <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+        <p><strong>End Date:</strong> {{ post.endDate }}</p>
+        <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+        <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+        <p><strong>Status:</strong> {{ post.status }}</p>
+        <button>More Details</button>
+      </div>
+    </div>
+</div>

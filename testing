@@ -1,3 +1,102 @@
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service';
+import { Post } from '../../model/post';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
+
+  posts: Post[] = [];
+
+  constructor(private postService: PostService) { }
+
+  ngOnInit(): void {
+    // Initially fetch all posts on initialization
+    this.getPosts();
+  }
+
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getCompletePosts(): void {
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getIncompletePosts(): void {
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostsByCategory(category: string): void {
+    this.postService.getPostsByCategory(category)
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostsByTitle(title: string): void {
+    this.postService.getPostsByTitle(title)
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostById(postId: number): void {
+    this.postService.getPostById(postId)
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getPostsSortedByDate(): void {
+    this.postService.getPostsSortedByDate()
+      .subscribe(posts => this.posts = posts);
+  }
+}
+
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Post } from '../model/post';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+
+  constructor(private http: HttpClient) { }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); 
+  }
+  
+  getCompletedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/complete');
+  }
+
+  getIncompletedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/incomplete');
+  } 
+
+  getPostsByCategory(category: string): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/category/' + category);
+  }
+
+  getPostsByTitle(title: string): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/title/' + title);
+  }
+
+  getPostById(postId: number): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/' + postId);
+  }
+
+  getPostsSortedByDate(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/sortedByDate');
+  }
+}
 <div>
     <h3>Available Posts:</h3>
     <h6 *ngIf="posts.length < 1">
@@ -9,6 +108,11 @@
         <button class="filter-button" (click)="getCompletePosts()">Completed Posts</button>
         <button class="filter-button" (click)="getIncompletedPosts()">Incomplete Posts</button>
     </div>
+
+    <input type="text" placeholder="Search by Category" (keyup)="getPostsByCategory($event.target.value)">
+    <input type="text" placeholder="Search by Title" (keyup)="getPostsByTitle($event.target.value)">
+    <input type="number" placeholder="Search by ID" (keyup)="getPostById($event.target.value)">
+    <button class="filter-button" (click)="getPostsSortedByDate()">Sort by Date</button>
   
     <div class="post-grid" *ngIf="posts.length > 0">
         <div class="post-box" *ngFor="let post of posts">
@@ -24,22 +128,3 @@
         </div>
     </div>
 </div>
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.filter-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.filter-button:hover {
-  background-color: #45a049;
-}

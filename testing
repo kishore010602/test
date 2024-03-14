@@ -1,25 +1,25 @@
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
+✘ [ERROR] NG9: Property 'getCompletedPosts' does not exist on type 'PostsComponent'. [plugin angular-compiler]
 
-.post-box {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-}
+    src/app/components/posts/posts.component.html:19:23:
+      19 │       <button (click)="getCompletedPosts()">Completed Posts</button>
+         ╵                        ~~~~~~~~~~~~~~~~~
 
-button {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
+  Error occurs in the template of component PostsComponent.
 
-button:hover {
-  background-color: #0056b3;
-}
+    src/app/components/posts/posts.component.ts:9:15:
+      9 │   templateUrl: './posts.component.html',
+        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+✘ [ERROR] NG9: Property 'getIncompletedPosts' does not exist on type 'PostsComponent'. [plugin angular-compiler]
+
+    src/app/components/posts/posts.component.html:20:23:
+      20 │       <button (click)="getIncompletedPosts()">Incomplete Posts</bu...
+         ╵                        ~~~~~~~~~~~~~~~~~~~
+
+  Error occurs in the template of component PostsComponent.
+
+    src/app/components/posts/posts.component.ts:9:15:
+      9 │   templateUrl: './posts.component.html',
+        ╵                ~~~~~~~~~~~~~~~~~~~~~~~~
+

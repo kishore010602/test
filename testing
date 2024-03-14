@@ -1,168 +1,86 @@
-[ERROR] TS2339: Property 'getPostById' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:28:21:
-      28 │     this.postService.getPostById(postId)
-         ╵                      ~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'post' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:29:17:
-      29 │       .subscribe(post => {
-         ╵                  ~~~~
-
-
-✘ [ERROR] TS2339: Property 'getPostsSortedByDate' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:35:21:
-      35 │     this.postService.getPostsSortedByDate()
-         ╵                      ~~~~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:36:17:
-      36 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-✘ [ERROR] TS2339: Property 'getCompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:46:21:
-      46 │     this.postService.getCompletedPosts()
-         ╵                      ~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:47:17:
-      47 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-✘ [ERROR] TS2339: Property 'getIncompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:53:21:
-      53 │     this.postService.getIncompletedPosts()
-         ╵                      ~~~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:54:17:
-      54 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-⠙ Changes detected. Rebuilding...
-✘ [ERROR] TS2339: Property 'getPostById' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:28:21:
-      28 │     this.postService.getPostById(postId)
-         ╵                      ~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'post' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:29:17:
-      29 │       .subscribe(post => {
-         ╵                  ~~~~
-
-
-✘ [ERROR] TS2339: Property 'getPostsSortedByDate' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:35:21:
-      35 │     this.postService.getPostsSortedByDate()
-         ╵                      ~~~~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:36:17:
-      36 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-✘ [ERROR] TS2339: Property 'getCompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:46:21:
-      46 │     this.postService.getCompletedPosts()
-         ╵                      ~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:47:17:
-      47 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-✘ [ERROR] TS2339: Property 'getIncompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:53:21:
-      53 │     this.postService.getIncompletedPosts()
-         ╵                      ~~~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:54:17:
-      54 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-⠋ Changes detected. Rebuilding...
-✘ [ERROR] TS2339: Property 'getPostById' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:28:21:
-      28 │     this.postService.getPostById(postId)
-         ╵                      ~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'post' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:29:17:
-      29 │       .subscribe(post => {
-         ╵                  ~~~~
-
-
-✘ [ERROR] TS2339: Property 'getPostsSortedByDate' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:35:21:
-      35 │     this.postService.getPostsSortedByDate()
-         ╵                      ~~~~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:36:17:
-      36 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-✘ [ERROR] TS2339: Property 'getCompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:46:21:
-      46 │     this.postService.getCompletedPosts()
-         ╵                      ~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:47:17:
-      47 │       .subscribe(posts => {
-         ╵                  ~~~~~
-
-
-✘ [ERROR] TS2339: Property 'getIncompletedPosts' does not exist on type 'PostService'. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:53:21:
-      53 │     this.postService.getIncompletedPosts()
-         ╵                      ~~~~~~~~~~~~~~~~~~~
-
-
-✘ [ERROR] TS7006: Parameter 'posts' implicitly has an 'any' type. [plugin angular-compiler]
-
-    src/app/components/posts/posts.component.ts:54:17:
-      54 │       .subscribe(posts => {
-         ╵                  ~~~~~
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'; // Import PostService
+import { Post } from '../../model/post'; // Import Post model
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-posts',standalone:true,
+  imports:[CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
+
+  posts: Post[] = [];
+
+  constructor(private postService: PostService) { }
+
+  ngOnInit(): void {
+    this.getPosts(); // Fetch posts on initialization
+  }
+
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+}
+
+<div>
+  <h3>Available Posts:</h3>
+  <h6 *ngIf="posts.length < 1">
+      No Products found!
+  </h6>
+
+  <div class="post-grid" *ngIf="posts.length > 0">
+      <div class="post-box" *ngFor="let post of posts">
+          <h4>ID: {{ post.id }}</h4>
+          <p><strong>Title:</strong> {{ post.title }}</p>
+          <p><strong>Category:</strong> {{ post.category }}</p>
+          <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+          <p><strong>End Date:</strong> {{ post.endDate }}</p>
+          <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+          <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+          <p><strong>Status:</strong> {{ post.status }}</p>
+          <button>More Details</button>
+      </div>
+  </div>
+</div>
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Post } from '../model/post';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+
+  constructor(private http: HttpClient) { }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/AllPosts'); // Adjust URL as needed
+  }
+  getPostById(postId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`http://localhost:8090/post/'+ postId);
+  }
+
+  getPostsByTitle(title: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`http://localhost:8090/postByTitle/${title}`);
+  }
+
+  getPostsSortedByDate(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/newestFirst');
+  }
+
+  getCompletedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/complete');
+  }
+
+  getIncompletedPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>('http://localhost:8090/posts/incomplete');
+  }
+
+  getPostsByCategory(category: string): Observable<Post[]> {
+    return this.http.get<Post[]>(`http://localhost:8090/posts/${category}`);
+  }
+}

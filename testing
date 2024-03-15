@@ -1,34 +1,55 @@
-<div>
-    <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length < 1">
-        No Products found!
-    </h6>
-    
-    <div class="filter-container">
-        <select class="category-dropdown" [(ngModel)]="selectedCategory" (change)="filterByCategory()">
-            <option value="">All Categories</option>
-            <option value="medical">Medical</option>
-            <option value="education">Education</option>
-            <option value="food">Food</option>
-        </select>
-        <button class="filter-button" (click)="getPosts()">All Posts</button>
-        <button class="filter-button" (click)="getCompletePosts()">Completed Posts</button>
-        <button class="filter-button" (click)="getIncompletedPosts()">Incomplete Posts</button>
-        <button class="filter-button" (click)="getPostsSortedByDate()">Sort by Date</button>
-    </div>
-    
-    <div class="post-grid" *ngIf="filteredPosts.length > 0">
-        <div class="post-box" *ngFor="let post of filteredPosts">
-            <h4>ID: {{ post.id }}</h4>
-            <p><strong>Title:</strong> {{ post.title }}</p>
-            <p><strong>Category:</strong> {{ post.category }}</p>
-            <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-            <p><strong>End Date:</strong> {{ post.endDate }}</p>
-            <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-            <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-            <p><strong>Status:</strong> {{ post.status }}</p>
-            <p *ngIf="post.status === 'incomplete'"><button (click)="donate(post)">Donate</button></p>
-            <button (click)="showDetails(post)">More Details</button>
-        </div>
-    </div>
-</div>
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'; // Import PostService
+import { Post } from '../../model/post'; // Import Post model
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
+
+  posts: Post[] = [];
+
+  constructor(private postService: PostService) { }
+
+  ngOnInit(): void {
+    // Initially fetch all posts on initialization
+    this.getPosts();
+  }
+
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getCompletePosts(): void { // Separate method for completed posts
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+
+  getIncompletedPosts(): void { // Separate method for incomplete posts
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts);
+  }
+  getPostsSortedByDate(): void {
+    this.postService.getPostsSortedByDate()
+      .subscribe(posts => this.posts = posts);
+  }
+
+
+
+
+ 
+}
+
+
+
+
+
+  
+
+

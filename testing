@@ -21,63 +21,9 @@
             <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
             <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
             <p><strong>Status:</strong> {{ post.status }}</p>
-            <p *ngIf="post.status === 'incomplete'"><button (click)="donate(post)">Donate</button></p>
-            <button (click)="showDetails(post)">More Details</button>
-            <div *ngIf="post.expanded">
-                <p><strong>Description:</strong> {{ post.description }}</p>
-            </div>
+            <p><strong>Description:</strong> {{ post.description }}</p>
+            
         </div>
     </div>
 </div>
-import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service'; // Import PostService
-import { Post } from '../../model/post'; // Import Post model
-import { CommonModule } from '@angular/common';
 
-@Component({
-  selector: 'app-posts',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css']
-})
-export class PostsComponent implements OnInit {
-
-  posts: Post[] = [];
-
-  constructor(private postService: PostService) { }
-
-  ngOnInit(): void {
-    // Initially fetch all posts on initialization
-    this.getPosts();
-  }
-
-  getPosts(): void {
-    this.postService.getAllPosts()
-      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
-  }
-
-  getCompletePosts(): void { // Separate method for completed posts
-    this.postService.getCompletedPosts()
-      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
-  }
-
-  getIncompletedPosts(): void { // Separate method for incomplete posts
-    this.postService.getIncompletedPosts()
-      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
-  }
-
-  getPostsSortedByDate(): void {
-    this.postService.getPostsSortedByDate()
-      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
-  }
-
-  showDetails(post: Post): void {
-    post.expanded = !post.expanded;
-  }
-
-  donate(post: Post): void {
-    // Logic for donation action
-    console.log('Donate action for post:', post);
-  }
-}

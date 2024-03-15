@@ -1,35 +1,83 @@
-export class Post {
-    constructor(
-      public id?: number,
-      public title?: string,
-      public description?: string,
-      public category?: string,
-      public startDate?: Date,
-      public endDate?: Date,
-      public amountRequested?: number,
-      public amountCollected?: number,
-      public status?: string,
-      public donationAccountId?: string,
-      public fundraiser?: Fundraiser,
-      public donations?: Payment[],
-      
-    ) {}
+<div>
+    <h3>Available Posts:</h3>
+    <h6 *ngIf="posts.length < 1">
+        No Products found!
+    </h6>
+    
+    <div class="button-container">
+        <button class="filter-button" (click)="getPosts()">All Posts</button>
+        <button class="filter-button" (click)="getCompletePosts()">Completed Posts</button>
+        <button class="filter-button" (click)="getIncompletedPosts()">Incomplete Posts</button>
+        <button class="filter-button" (click)="getPostsSortedByDate()">Sort by Date</button>
+    </div>
+    
+    <div class="post-grid" *ngIf="posts.length > 0">
+        <div class="post-box" *ngFor="let post of posts">
+            <h4>ID: {{ post.id }}</h4>
+            <p><strong>Title:</strong> {{ post.title }}</p>
+            <p><strong>Category:</strong> {{ post.category }}</p>
+            <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+            <p><strong>End Date:</strong> {{ post.endDate }}</p>
+            <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+            <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+            <p><strong>Status:</strong> {{ post.status }}</p>
+            <p *ngIf="post.status === 'incomplete'"><button (click)="donate(post)">Donate</button></p>
+            <button (click)="showDetails(post)">More Details</button>
+            <div *ngIf="post.expanded">
+                <p><strong>Description:</strong> {{ post.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+import { Component, OnInit } from '@angular/core';
+import { PostService } from '../../services/post.service'; // Import PostService
+import { Post } from '../../model/post'; // Import Post model
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-posts',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
+})
+export class PostsComponent implements OnInit {
+
+  posts: Post[] = [];
+
+  constructor(private postService: PostService) { }
+
+  ngOnInit(): void {
+    // Initially fetch all posts on initialization
+    this.getPosts();
   }
-  
-  export class Fundraiser {
-    constructor(
-      public id?: number,
-      public name?: string,
-      public email?: string
-    ) {}
+
+  getPosts(): void {
+    this.postService.getAllPosts()
+      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
   }
-  
-  export class Payment {
-    constructor(
-      public id?: number,
-      public amount?: number,
-      public date?: Date
-    ) {}
+
+  getCompletePosts(): void { // Separate method for completed posts
+    this.postService.getCompletedPosts()
+      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
   }
-  
-  
+
+  getIncompletedPosts(): void { // Separate method for incomplete posts
+    this.postService.getIncompletedPosts()
+      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
+  }
+
+  getPostsSortedByDate(): void {
+    this.postService.getPostsSortedByDate()
+      .subscribe(posts => this.posts = posts.map(post => ({...post, expanded: false})));
+  }
+
+  showDetails(post: Post): void {
+    post.expanded = !post.expanded;
+  }
+
+  donate(post: Post): void {
+    // Logic for donation action
+    console.log('Donate action for post:', post);
+  }
+}

@@ -1,152 +1,29 @@
-div {
-  font-family: Arial, sans-serif;
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
+<div class="post-grid" *ngIf="posts.length > 0">
+  <div class="post-box" *ngFor="let post of posts">
+    <img  *ngIf="post.category === 'food'"
+          src="https://fortuitousfoodies.com/ladies-healthy-picnic-luncheon/"
+          alt="Food Donation"
+          style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
+    <img  *ngIf="post.category === 'medical'"
+          src="https://i.pinimg.com/236x/71/7c/2f/717cdf2a8b29ab046f053ab7cd235f7e.jpg"
+          alt="Medical Donation"
+          style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
+    <img  *ngIf="post.category === 'education'"
+          src="https://stock.adobe.com/images/school-classroom-in-the-distance-without-a-little-youngster-distant-picture-of-an-elementary-school-with-seats-and-tables-but-no-students-or-teachers-images-with-a-retro-aesthetic-generative-ai/552909515&psig=AOvVaw0JJcDgZhKpzBOw3apYnmuC&ust=1711076896383000&source=images&cd=vfe&opi=89978449&ved=0CBIQRxqFwoTCMiBpaawhIUDFQAAAAAdAAAAABAE"
+          alt="Education Donation"
+          style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
 
-h3 {
-  color: #333;
-  margin-bottom: 20px;
-}
-
-h6 {
-  color: #888;
-}
-
-.button-container {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.filter-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: 2px solid transparent;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin: 0 10px;
-  font-weight: bold;
-}
-
-.filter-button:hover, .filter-button:focus {
-  background-color: #45a049;
-  border-color: #39843c;
-  outline: none;
-}
-
-select {
-  padding: 10px 20px;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  border-color: #39843c;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.post-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust the minimum size to your preference */
-  gap: 20px;
-}
-
-.post-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  background-color: white;
-  transition: transform 0.2s ease-in-out;
-  height: 100%; /* Ensure each box occupies the same height */
-}
-
-.post-box-content {
-  flex-grow: 1; /* Allow content to expand */
-}
-
-.post-box p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-.post-box strong {
-  color: #333;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between; /* Spread the buttons evenly */
-}
-
-.post-box button {
-  flex-grow: 1; /* Allow buttons to expand */
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 8px;
-}
-
-.post-box button:first-child {
-  margin-right: 5px; /* Add spacing between buttons */
-}
-
-.post-box:hover {
-  transform: translateY(-5px);
-}
-
-
-<div class="button-container">
-    
-     
-      <button class="filter-button" (click)="getPosts()">All Posts</button>
-      <button class="filter-button" (click)="getCompletedPosts()">Completed Donations</button>
-      <button class="filter-button" (click)="getIncompletedPosts()">Donatable Posts</button>
-      <button class="filter-button" (click)="getPostsSortedByDate()">Recent Posts</button>
-  
-    <div class="dropdown-container select-container">
-      <select name="Categories" #category (change)="onCategorySelected(category.value)">
-          <option value="">All Categories</option>
-          <option value="education">Education</option>
-          <option value="food">Food</option>
-          <option value="medical">Medical</option>
-      </select>
+    <p><strong>Title:</strong> {{ post.title }}</p>
+    <p><strong>Category:</strong> {{ post.category }}</p>
+    <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+    <p><strong>End Date:</strong> {{ post.endDate }}</p>
+    <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+    <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+    <p><strong>Description:</strong> {{ post.description }}</p>
+    <p><strong>Status:</strong> {{ post.status }}</p>
+    <div class="button-group">
+      <button *ngIf="post.status === 'incomplete'" (click)="redirectToTransaction(post)">Donate</button>
+      <button>View Donations</button>
     </div>
-    
-</div>
-
-   
-    <div>
-    <h3>Available Posts:</h3>
-    <h6 *ngIf="posts.length < 1">
-        No Products found!
-    </h6>
-    <div class="post-grid" *ngIf="posts.length > 0">
-        <div class="post-box" *ngFor="let post of posts">
-            
-
-            <p><strong>Title:</strong> {{ post.title }}</p>
-            <p><strong>Category:</strong> {{ post.category }}</p>
-            <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-            <p><strong>End Date:</strong> {{ post.endDate }}</p>
-            <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-            <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-            <p><strong>Description:</strong> {{ post.description }}</p>
-            <p><strong>Status:</strong> {{ post.status }}</p>
-            <div class="button-group">
-                <button *ngIf="post.status === 'incomplete'" (click)="redirectToTransaction(post)">Donate</button>
-                <button>View Donations</button>
-              </div>
-              
-        </div>
-    </div>
+  </div>
 </div>

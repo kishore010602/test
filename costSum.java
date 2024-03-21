@@ -1,52 +1,55 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust the minimum size to your preference */
+  gap: 20px;
+}
 
-public class costSum {
-    private String productName;
-    private Integer cost;
+.post-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: white;
+  transition: transform 0.2s ease-in-out;
+  height: 100%; /* Ensure each box occupies the same height */
+}
 
-    public String getProductName() {
-        return productName;
-    }
+.post-box-content {
+  flex-grow: 1; /* Allow content to expand */
+}
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
+.post-box p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
 
-    public Integer getCost() {
-        return cost;
-    }
+.post-box strong {
+  color: #333;
+}
 
-    public void setCost(Integer cost) {
-        this.cost = cost;
-    }
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Spread the buttons evenly */
+}
 
-    public costSum(String productName, Integer cost) {
-        this.productName = productName;
-        this.cost = cost;
-    }
+.post-box button {
+  flex-grow: 1; /* Allow buttons to expand */
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
 
-    @Override
-    public String toString() {
-        return "costSum{" +
-                "productName='" + productName + '\'' +
-                ", cost=" + cost +
-                '}';
-    }
+.post-box button:first-child {
+  margin-right: 5px; /* Add spacing between buttons */
+}
 
-    public static void main(String[] args) {
-        List<costSum> productList=new ArrayList<costSum>();
-        productList.add(new costSum("Car",10000));
-        productList.add(new costSum("Bike",8500));
-        productList.add(new costSum("Scooter",6500));
-        Optional<Integer> totalCost=productList.stream().map(costSum -> costSum.getCost()).reduce((a, b)->a+b);
-        System.out.println(totalCost);
-        Optional<costSum> minOpt=productList.stream().min((e1, e2)->e1.getCost().compareTo(e2.getCost()));
-        if(minOpt.isPresent()){
-            System.out.println(minOpt);
-        }
-    }
-
-
+.post-box:hover {
+  transform: translateY(-5px);
 }

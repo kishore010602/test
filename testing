@@ -25,6 +25,7 @@
   <script src="PostService.js"></script>
 
   <script>
+    const API_URL = 'http://localhost:8090/';
     const allPostsBtn = document.getElementById('allPostsBtn');
     const incompletePostsBtn = document.getElementById('incompletePostsBtn');
     const completedPostsBtn = document.getElementById('completedPostsBtn');
@@ -56,13 +57,13 @@
     }
 
     // Event listeners for buttons
-    allPostsBtn.addEventListener('click', () => fetchAndDisplayPosts('${API_URL}AllPosts'));
-    incompletePostsBtn.addEventListener('click', () => fetchAndDisplayPosts('${API_URL}posts/incomplete'));
-    completedPostsBtn.addEventListener('click', () => fetchAndDisplayPosts('${API_URL}posts/complete'));
-    sortByDateBtn.addEventListener('click', () => fetchAndDisplayPosts('${API_URL}posts/newestFirst'));
+    allPostsBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'AllPosts'));
+    incompletePostsBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'posts/incomplete'));
+    completedPostsBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'posts/complete'));
+    sortByDateBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'posts/newestFirst'));
     
     // Load all posts by default
-    fetchAndDisplayPosts('${API_URL}AllPosts');
+    fetchAndDisplayPosts(API_URL + 'AllPosts');
   </script>
 </body>
 </html>

@@ -1,24 +1,52 @@
-import axios from 'axios';
-import {axiosInstance} from "./axios-http-client";
+<div class="button-container">
 
-const API_URL = 'http://localhost:8090/';
+  <button value="All Posts" class="filter-button" (click)="getPosts()">All Posts</button>
+  <select class="form-select" style="max-width: 12vw;" name="Categories" #category
+          (change)="onCategorySelected(category.value)">
+    <option value="">All Categories</option>
+    <option value="education">Education</option>
+    <option value="food">Food</option>
+    <option value="medical">Medical</option>
+  </select>
+  <button value="Recent Posts" class="filter-button" (click)="getPostsSortedByDate()">Recent Posts</button>
+  <button value="Donatable Posts" class="filter-button" (click)="getIncompletedPosts()">Donatable Posts</button>
 
-class PostService {
-  getCompletedPosts() {
-    return axiosInstance.get(API_URL + 'posts/complete');
-  }
+  <button value="Completed Donations" class="filter-button" (click)="getCompletedPosts()">Completed Donations</button>
 
-  getIncompletedPosts() {
-    return axiosInstance.get(API_URL + 'posts/incomplete');
-  }
+</div>
 
-  getAllPosts() {
-    return axiosInstance.get(API_URL + 'AllPosts');
-  }
 
-  getPostsSortedByDate() {
-    return axiosInstance.get(API_URL + 'posts/newestFirst');
-  }
-}
+<div>
+  <h3>Available Posts:</h3>
+  <h6 *ngIf="posts.length < 1">
+    No Posts found!
+  </h6>
+  <div class="post-grid" *ngIf="posts.length > 0">
+    <div class="post-box" *ngFor="let post of posts">
+      <img *ngIf="post.category === 'food'" src="assets/images/food.jpg" alt="Food Donation"
+           style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
+      <img *ngIf="post.category === 'medical'" src="assets/images/medical.jpg" alt="Medical Donation"
+           style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
+      <img *ngIf="post.category === 'education'" src="assets/images/education2.png" alt="Education Donation"
+           style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
 
-export default new PostService();
+      <h4><strong>{{ post.title }}</strong></h4>
+      <p><strong>Category:</strong> {{ post.category }}</p>
+      <p><strong>Start Date:</strong> {{ post.startDate }}</p>
+      <p><strong>End Date:</strong> {{ post.endDate }}</p>
+      <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
+      <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
+      <p><strong>Description:</strong> {{ post.description }}</p>
+      <p *ngIf="post.status === 'incomplete'" style="color: red; outline: 1px solid red; padding: 2px;">
+        <strong>Status:</strong> {{ post.status }}</p>
+      <p *ngIf="post.status === 'completed'" style="color: green; outline: 1px solid green; padding: 2px;">
+        <strong>Status:</strong> {{ post.status }}</p>
+
+      <div class="button-group">
+        <button *ngIf="post.status === 'incomplete'" (click)="redirectToTransaction(post)"
+                class="btn btn-success">Donate</button>
+        <button (click)="redirectToViewDonations(post)" class="btn btn-warning">View Donations</button>
+      </div>
+    </div>
+  </div>
+</div>

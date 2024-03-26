@@ -1,52 +1,59 @@
-<div class="button-container">
+import axios from 'axios';
 
-  <button value="All Posts" class="filter-button" (click)="getPosts()">All Posts</button>
-  <select class="form-select" style="max-width: 12vw;" name="Categories" #category
-          (change)="onCategorySelected(category.value)">
-    <option value="">All Categories</option>
-    <option value="education">Education</option>
-    <option value="food">Food</option>
-    <option value="medical">Medical</option>
-  </select>
-  <button value="Recent Posts" class="filter-button" (click)="getPostsSortedByDate()">Recent Posts</button>
-  <button value="Donatable Posts" class="filter-button" (click)="getIncompletedPosts()">Donatable Posts</button>
+const API_URL = 'http://localhost:8090/';
 
-  <button value="Completed Donations" class="filter-button" (click)="getCompletedPosts()">Completed Donations</button>
+class PostService {
+  constructor() {}
 
-</div>
+  async getPostsByCategory(category) {
+    try {
+      const response = await axios.get(API_URL + `posts/category/${category}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching posts by category:', error);
+      throw error; // Re-throw for handling in components
+    }
+  }
 
+  async getPostsSortedByDate() {
+    try {
+      const response = await axios.get(API_URL + 'posts/newestFirst');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching posts sorted by date:', error);
+      throw error;
+    }
+  }
 
-<div>
-  <h3>Available Posts:</h3>
-  <h6 *ngIf="posts.length < 1">
-    No Posts found!
-  </h6>
-  <div class="post-grid" *ngIf="posts.length > 0">
-    <div class="post-box" *ngFor="let post of posts">
-      <img *ngIf="post.category === 'food'" src="assets/images/food.jpg" alt="Food Donation"
-           style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
-      <img *ngIf="post.category === 'medical'" src="assets/images/medical.jpg" alt="Medical Donation"
-           style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
-      <img *ngIf="post.category === 'education'" src="assets/images/education2.png" alt="Education Donation"
-           style="width: 100%; height: auto; object-fit: cover; margin-bottom: 10px;">
+  async getCompletedPosts() {
+    try {
+      const response = await axios.get(API_URL + 'posts/complete');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching completed posts:', error);
+      throw error;
+    }
+  }
 
-      <h4><strong>{{ post.title }}</strong></h4>
-      <p><strong>Category:</strong> {{ post.category }}</p>
-      <p><strong>Start Date:</strong> {{ post.startDate }}</p>
-      <p><strong>End Date:</strong> {{ post.endDate }}</p>
-      <p><strong>Amount Requested:</strong> {{ post.amountRequested }}</p>
-      <p><strong>Amount Collected:</strong> {{ post.amountCollected }}</p>
-      <p><strong>Description:</strong> {{ post.description }}</p>
-      <p *ngIf="post.status === 'incomplete'" style="color: red; outline: 1px solid red; padding: 2px;">
-        <strong>Status:</strong> {{ post.status }}</p>
-      <p *ngIf="post.status === 'completed'" style="color: green; outline: 1px solid green; padding: 2px;">
-        <strong>Status:</strong> {{ post.status }}</p>
+  async getIncompletePosts() {
+    try {
+      const response = await axios.get(API_URL + 'posts/incomplete');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching incompleted posts:', error);
+      throw error;
+    }
+  }
 
-      <div class="button-group">
-        <button *ngIf="post.status === 'incomplete'" (click)="redirectToTransaction(post)"
-                class="btn btn-success">Donate</button>
-        <button (click)="redirectToViewDonations(post)" class="btn btn-warning">View Donations</button>
-      </div>
-    </div>
-  </div>
-</div>
+  async getAllPosts() {
+    try {
+      const response = await axios.get(API_URL + 'AllPosts');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching all posts:', error);
+      throw error;
+    }
+  }
+}
+
+export default new PostService();

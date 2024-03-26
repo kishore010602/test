@@ -79,6 +79,11 @@
   cursor: pointer;
   transition: background-color 0.3s;
   margin-top: 8px;
+  display: block;
+}
+
+.post-box button + button {
+  margin-top: 5px;
 }
 
 .post-box:hover {

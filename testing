@@ -1,3 +1,1 @@
-getPostsByCategory(category){
-    return axiosInstance.get('${API_URL}posts/${category}');
-  }
+http://localhost:8090/posts/Medical

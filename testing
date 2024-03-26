@@ -1,69 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Posts</title>
-</head>
-<body>
+import axios from 'axios';
+import {axiosInstance} from "./axios-http-client";
 
-  <div class="container">
-    <h1>Posts</h1>
-    <div class="buttons">
-      <button id="allPostsBtn">All Posts</button>
-      <button id="incompletePostsBtn">Incomplete Posts</button>
-      <button id="completedPostsBtn">Completed Posts</button>
-      <button id="sortByDateBtn">Sort By Date</button>
-    </div>
+const API_URL = 'http://localhost:8090/';
 
-    <div id="postsGrid">
-      <!-- Posts will be displayed here -->
-    </div>
-  </div>
+class PostService {
+  getCompletedPosts() {
+    return axiosInstance.get(API_URL + 'posts/complete');
+  }
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="PostService.js"></script>
+  getIncompletedPosts() {
+    return axiosInstance.get(API_URL + 'posts/incomplete');
+  }
 
-  <script>
-    const API_URL = 'http://localhost:8090/';
-    const allPostsBtn = document.getElementById('allPostsBtn');
-    const incompletePostsBtn = document.getElementById('incompletePostsBtn');
-    const completedPostsBtn = document.getElementById('completedPostsBtn');
-    const sortByDateBtn = document.getElementById('sortByDateBtn');
-    const postsGrid = document.getElementById('postsGrid');
+  getAllPosts() {
+    return axiosInstance.get(API_URL + 'AllPosts');
+  }
 
-    // Function to fetch and display posts
-    async function fetchAndDisplayPosts(url) {
-      try {
-        const response = await axios.get(url);
-        const posts = response.data;
+  getPostsSortedByDate() {
+    return axiosInstance.get(API_URL + 'posts/newestFirst');
+  }
+}
 
-        // Clear existing posts
-        postsGrid.innerHTML = '';
-
-        // Render posts
-        posts.forEach(post => {
-          const postElement = document.createElement('div');
-          postElement.innerHTML = `
-            <h3>${post.title}</h3>
-            <p>${post.description}</p>
-            <!-- Include other post details as needed -->
-          `;
-          postsGrid.appendChild(postElement);
-        });
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-      }
-    }
-
-    // Event listeners for buttons
-    allPostsBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'AllPosts'));
-    incompletePostsBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'posts/incomplete'));
-    completedPostsBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'posts/complete'));
-    sortByDateBtn.addEventListener('click', () => fetchAndDisplayPosts(API_URL + 'posts/newestFirst'));
-    
-    // Load all posts by default
-    fetchAndDisplayPosts(API_URL + 'AllPosts');
-  </script>
-</body>
-</html>
+export default new PostService();

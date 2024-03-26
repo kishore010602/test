@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Posts</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file for styling -->
 </head>
 <body>
 
@@ -17,13 +16,13 @@
       <button id="sortByDateBtn">Sort By Date</button>
     </div>
 
-    <div id="postsGrid" class="grid-container">
+    <div id="postsGrid">
       <!-- Posts will be displayed here -->
     </div>
   </div>
 
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script> <!-- Include Axios library -->
-  <script src="PostService.js"></script> <!-- Include your PostService script -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="PostService.js"></script>
 
   <script>
     const allPostsBtn = document.getElementById('allPostsBtn');
@@ -44,7 +43,6 @@
         // Render posts
         posts.forEach(post => {
           const postElement = document.createElement('div');
-          postElement.classList.add('post');
           postElement.innerHTML = `
             <h3>${post.title}</h3>
             <p>${post.description}</p>

@@ -1,1 +1,23 @@
-Module not found: Error: Can't resolve 'bootstrap/dist/css/bootstrap.css' in '/Users/kr52/Library/CloudStorage/OneDrive-azureford/Desktop/ReactApp/Fundraise-React/src/components'
+import axios from 'axios';
+
+const API_URL = 'http://localhost:8090/';
+
+class PostService {
+  getCompletedPosts() {
+    return axios.get(API_URL + 'posts/complete');
+  }
+
+  getIncompletedPosts() {
+    return axios.get(API_URL + 'posts/incomplete');
+  }
+
+  getAllPosts() {
+    return axios.get(API_URL + 'AllPosts');
+  }
+
+  getPostsSortedByDate() {
+    return axios.get(API_URL + 'posts/newestFirst');
+  }
+}
+
+export default new PostService();

@@ -68,7 +68,7 @@ const Post = () => {
     <div>
       <div className="button-container">
     <button value="All Posts" className="filter-button" onClick={getPosts}>All Posts</button>
-    <select className="form-select" style={{ maxWidth: '12vw' }} name="Categories" value={selectedCategory} onChange={(e) => getPostsByCategory(e.target.value)}>
+    <select className="form-select" style={{ maxWidth: '12vw' }} name="Categories" onChange={(e) => getPostsByCategory(e.target.value)}>
       <option value="">All Categories</option>
       <option value="education">Education</option>
       <option value="food">Food</option>
@@ -123,30 +123,3 @@ const Post = () => {
 };
 
 export default Post;
-import axios from 'axios';
-import { axiosInstance } from "./axios-http-client";
-
-const API_URL = 'http://localhost:8090/';
-
-class PostService {
-  getCompletedPosts() {
-    return axiosInstance.get(API_URL + 'posts/complete');
-  }
-
-  getIncompletePosts() {
-    return axiosInstance.get(API_URL + 'posts/incomplete');
-  }
-
-  getAllPosts() {
-    return axiosInstance.get(API_URL + 'AllPosts');
-  }
-
-  getPostsSortedByDate() {
-    return axiosInstance.get(API_URL + 'posts/newestFirst');
-  }
-  getPostsByCategory(category){
-    return axiosInstance.get(`${API_URL}posts/${category}`);
-  }
-}
-
-export default PostService;

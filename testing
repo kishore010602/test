@@ -1,1 +1,4 @@
-http://localhost:8090/posts/Medical
+<div>
+      <div className="button-container">
+        <button value="All Posts" className="filter-button" onClick={getPosts}>All Posts</button>
+        <select className="form-select" style={{ maxWidth: '12vw' }} name="Categories" value={selectedCategory} onChange={(e) => getPostsByCategory(e.target.value)}>

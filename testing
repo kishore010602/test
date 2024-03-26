@@ -1,111 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import PostService from '../services/PostService';
-import './Post.css'; // Import CSS file for styling
+.post-container {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
 
-const Post = () => {
-  const [posts, setPosts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const postService = new PostService();
+.button-container {
+  margin-bottom: 20px;
+  text-align: center;
+  display: flex;
+}
 
-  const getPosts = async () => {
-    try {
-      const { data } = await postService.getAllPosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
-  };
+.filter-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 0 10px;
+  font-weight: bold;
+}
 
-  const getPostsByCategory = async (category) => {
-    try {
-      const { data } = await postService.getPostsByCategory(category);
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts by category:', error);
-    }
-  };
+.filter-button:hover, .filter-button:focus {
+  background-color: #45a049;
+  border-color: #39843c;
+  outline: none;
+}
 
-  const getPostsSortedByDate = async () => {
-    try {
-      const { data } = await postService.getPostsSortedByDate();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts sorted by date:', error);
-    }
-  };
+.form-select {
+  font-weight: bolder;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  border-color: #39843c;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  max-width: 12vw;
+}
 
-  const getCompletedPosts = async () => {
-    try {
-      const { data } = await postService.getCompletedPosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching completed posts:', error);
-    }
-  };
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
 
-  const getIncompletePosts = async () => {
-    try {
-      const { data } = await postService.getIncompletePosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching incompleted posts:', error);
-    }
-  };
+.post-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: white;
+  transition: transform 0.2s ease-in-out;
+}
 
-  useEffect(() => {
-    getPosts();
-  }, []);
+.post-box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
 
-  const onCategorySelected = (category) => {
-    setSelectedCategory(category);
-    if (category) {
-      getPostsByCategory(category); 
-    } else {
-      getPosts();
-    }
-  };
+.post-box h4 {
+  margin-top: 0;
+}
 
-  return (
-    <div className="post-container">
-      <div className="button-container">
-        <button className="filter-button" onClick={getPosts}>All Posts</button>
-        <select className="form-select" name="Categories" onChange={(e) => getPostsByCategory(e.target.value)}>
-          <option value="">All Categories</option>
-          <option value="education">Education</option>
-          <option value="food">Food</option>
-          <option value="medical">Medical</option>
-        </select>
-        <button className="filter-button" onClick={getPostsSortedByDate}>Recent Posts</button>
-        <button className="filter-button" onClick={getIncompletePosts}>Donatable Posts</button>
-        <button className="filter-button" onClick={getCompletedPosts}>Completed Donations</button>
-      </div>
+.post-box p {
+  margin: 5px 0;
+}
 
-      <div className="post-grid">
-        {posts.map((post) => (
-          <div className="post-box" key={post.id || post._id}>
-            <img
-              src={
-                post.category === 'food' ? 'assets/images/food.jpg' :
-                post.category === 'medical' ? 'assets/images/medical.jpg' :
-                post.category === 'education' ? 'assets/images/education2.png' :
-                ''
-              }
-              alt={post.category + ' Donation'}
-            />
-            <h4>{post.title}</h4>
-            <p><strong>Category:</strong> {post.category}</p>
-            <p><strong>Start Date:</strong> {post.startDate}</p>
-            <p><strong>End Date:</strong> {post.endDate}</p>
-            <p><strong>Amount Requested:</strong> {post.amountRequested}</p>
-            <p><strong>Amount Collected:</strong> {post.amountCollected || '0'}</p>
-            <p><strong>Status:</strong> {post.status}</p>
-            {post.status === 'incomplete' && <button>Donate</button>}
-            <button>View Donation Details</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+.post-box button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 8px;
+}
 
-export default Post;
+.post-box:hover {
+  transform: translateY(-5px);
+}

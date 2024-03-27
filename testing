@@ -1,20 +1,20 @@
 // Profile.js
 
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
-  const user = JSON.parse(sessionStorage.getItem('user')); // Retrieve user from sessionStorage
+  const user = JSON.parse(sessionStorage.getItem('user'));
+  const history = useHistory();
 
   useEffect(() => {
     if (!user) {
-      // Redirect to login if user is not logged in
-      navigate('/login');
+      history.push('/login'); // Redirect to login if user is not logged in
     } else {
-      // Fetch posts for the logged-in fundraiser
       fetchPosts(user.id);
     }
-  }, [user]);
+  }, [user, history]);
 
   const fetchPosts = async (fundraiserId) => {
     try {
@@ -29,14 +29,26 @@ const Profile = () => {
     }
   };
 
+  const showPosts = () => {
+    // Logic to display posts
+    return (
+      <div>
+        <h3>Posts</h3>
+        {posts.map(post => (
+          <div key={post.id}>
+            <h4>{post.title}</h4>
+            <p>{post.description}</p>
+            {/* Render other post details as needed */}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <div>
       <h2>Profile Page</h2>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul>
+      <button onClick={showPosts}>View Posts</button>
     </div>
   );
 };

@@ -1,3 +1,39 @@
-getPostsByFundraiserId(id){
-    return axiosInstance.get(API_URL+'post/fundraiser/'+id);
-  }
+// Profile.js
+
+import React, { useState, useEffect } from 'react';
+import { getPostsByFundraiserId } from './api'; // Import the function to fetch posts
+import './Profile.css'; // Import CSS for styling the grid
+
+const Profile = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        // Assume user is logged in and you have the fundraiser ID stored
+        const fundraiserId = 123; // Replace with the actual fundraiser ID
+        const response = await getPostsByFundraiserId(fundraiserId);
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  return (
+    <div className="post-grid">
+      {posts.map(post => (
+        <div key={post.id} className="post-box">
+          {/* Render post details */}
+          <h4>{post.title}</h4>
+          <p>{post.description}</p>
+          {/* Add more details as needed */}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Profile;

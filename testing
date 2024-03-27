@@ -1,18 +1,19 @@
 // Profile.js
 
 import React, { useState, useEffect } from 'react';
-import { getPostsByFundraiserId } from './api'; // Import the function to fetch posts
-import './Profile.css'; // Import CSS for styling the grid
+import PostService from '../services/PostService';
 
 const Profile = () => {
   const [posts, setPosts] = useState([]);
+  const postService = new PostService();
+
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Assume user is logged in and you have the fundraiser ID stored
-        const fundraiserId = 123; // Replace with the actual fundraiser ID
-        const response = await getPostsByFundraiserId(fundraiserId);
+        
+        const fundraiserId = 1;
+        const response = await postService.getPostsByFundraiserId(fundraiserId);
         setPosts(response.data);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -26,10 +27,10 @@ const Profile = () => {
     <div className="post-grid">
       {posts.map(post => (
         <div key={post.id} className="post-box">
-          {/* Render post details */}
+        
           <h4>{post.title}</h4>
           <p>{post.description}</p>
-          {/* Add more details as needed */}
+         
         </div>
       ))}
     </div>

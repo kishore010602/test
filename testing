@@ -1,10 +1,18 @@
-<h4>{post.title}</h4>
-            <p><strong>Category:</strong> {post.category}</p>
-            <p><strong>Start Date:</strong> {post.startDate}</p>
-            <p><strong>End Date:</strong> {post.endDate}</p>
-            <p><strong>Amount Requested:</strong> {post.amountRequested}</p>
-            <p><strong>Amount Collected:</strong> {post.amountCollected || '0'}</p>
-            <p><strong>Status:</strong> {post.status}</p>
-            {post.status === 'incomplete' && <button className='button-group'>Donate</button>}
-            <button className='button-group'>View Donation Details</button>
-          </div>
+return (
+  <div className="post-grid">
+    {posts.map(post => (
+      <div key={post.id} className="post-box">
+        {/* Render post details */}
+        <h4>{post.title}</h4>
+        <p><strong>Category:</strong> {post.category}</p>
+        <p><strong>Start Date:</strong> {post.startDate}</p>
+        <p><strong>End Date:</strong> {post.endDate}</p>
+        <p><strong>Amount Requested:</strong> {post.amountRequested}</p>
+        <p><strong>Amount Collected:</strong> {post.amountCollected || '0'}</p>
+        <p><strong>Status:</strong> {post.status}</p>
+        {post.status === 'incomplete' && <button className='button-group'>Donate</button>}
+        <button className='button-group'>View Donation Details</button>
+      </div>
+    ))}
+  </div>
+);

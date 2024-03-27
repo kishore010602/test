@@ -1,185 +1,44 @@
-layout.js
-import {Outlet,Link} from "react-router-dom"
-import './Layout.css';
+// Profile.js
 
-function Layout() {
-    return (
-        <>
-      <nav>
-        <ul>
-        <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/posts">Posts</Link>
-          </li>
-          <li>
-            <Link to="/test">Test</Link>
-          </li>
-          <li>
-            <Link to="/signup">FundRaiserSignup</Link>
-          </li>
-          <li>
-            <Link to="/login">FundRaiserLogin</Link>
-          </li>
-        </ul>
-      </nav>
+import React, { useState, useEffect } from 'react';
 
-        <Outlet></Outlet>
-        </>
+const Profile = () => {
+  const [posts, setPosts] = useState([]);
+  const user = JSON.parse(sessionStorage.getItem('user')); // Retrieve user from sessionStorage
 
-    );
-}
+  useEffect(() => {
+    if (!user) {
+      // Redirect to login if user is not logged in
+      navigate('/login');
+    } else {
+      // Fetch posts for the logged-in fundraiser
+      fetchPosts(user.id);
+    }
+  }, [user]);
 
-export default Layout;
-
-profile.js
-function Profile() {
-    return (
-        <>
-        <h3>Profile</h3>
-        </>
-    );
-}
-
-export default Profile;
-
-app.js
-
-import './App.css';
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './components/Home';
-import Layout from './components/Layout';
-import NoPage from './components/NoPage';
-import Test from './components/Test';
-import Profile from './components/Profile';
-import Posts from './components/Posts';
-import CreatePost from './components/CreatePost';
-import FundRaiserSignup from './components/FundRaiserSignup';
-import FundRaiserLogin from './components/FundRaiserLogin';
-
-function App() {
-  return (
-    
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Layout />}>
-      <Route path="signup" element={<FundRaiserSignup/>}/>
-      <Route path="login" element={<FundRaiserLogin/>}/>
-      <Route path="profile" element={<Profile/>} />
-        <Route index element={<Home />} />
-        <Route path="posts" element={<Posts/>} />
-        <Route path="test" element={<Test/>} />
-        <Route path="create-post" element={<CreatePost/>} />
-        <Route path="*" element={<NoPage />} />
-      </Route>
-    </Routes>
-  </BrowserRouter>
-
-  );
-}
-
-export default App;
-fundraiserlogin.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-function FundRaiserLogin() {
-  const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
-  });
-  const [error, setError] = useState('');
-
-  // Update credentials state as user types in input fields
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({
-      ...credentials,
-      [name]: value,
-    });
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    setError(''); // Reset error message on new submission
-
+  const fetchPosts = async (fundraiserId) => {
     try {
-      const response = await fetch('http://localhost:8090/fundraiser/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
-      });
-
+      const response = await fetch(`http://localhost:8090/posts/fundraiser/${fundraiserId}`);
       if (!response.ok) {
-        // If the server response is not ok, throw an error with the status
-        throw new Error(`Error: ${response.status}`);
+        throw new Error('Failed to fetch posts');
       }
-
       const data = await response.json();
-      let user = {
-        id:data.id,
-        name:data.name,
-        email:data.email,
-        role:"fundraiser"
-      };
-      // Assuming the token is in data.token. Adjust as needed based on your API response
-      sessionStorage.setItem("user", JSON.stringify(user));
-      
-      alert('Login successful!');
-      
-      navigate('/profile');
-      // Here, you can redirect the user or perform other actions upon successful login
-
+      setPosts(data);
     } catch (error) {
-      console.error('Login failed:', error);
-      setError('Failed to login. Please check your username and password.');
+      console.error('Error fetching posts:', error);
     }
   };
 
   return (
     <div>
-      <h2>Login</h2>
-      
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            type="text"
-            name="email"
-            value={credentials.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={credentials.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      <h2>Profile Page</h2>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
-export default FundRaiserLogin;
-
-
+export default Profile;

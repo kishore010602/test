@@ -1,216 +1,12 @@
-react-dom.development.js:37 Warning: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components
-    at input
-    at label
-    at form
-    at div
-    at DonorProfile (http://localhost:3000/static/js/bundle.js:913:74)
-    at Profile (http://localhost:3000/static/js/bundle.js:3092:81)
-    at RenderedRoute (http://localhost:3000/static/js/bundle.js:42215:5)
-    at Outlet (http://localhost:3000/static/js/bundle.js:42819:26)
-    at Layout
-    at RenderedRoute (http://localhost:3000/static/js/bundle.js:42215:5)
-    at Routes (http://localhost:3000/static/js/bundle.js:42906:5)
-    at Router (http://localhost:3000/static/js/bundle.js:42840:15)
-    at BrowserRouter (http://localhost:3000/static/js/bundle.js:40793:5)
-    at App
-printWarning @ react-dom.development.js:37
-Show 1 more frame
-Show less
-:8090/donor/1:1 
-        
-        
-       Failed to load resource: the server responded with a status of 500 ()
-main.029a981975f1c353f749.hot-update.js:50 Fetch error: AxiosError
-fetchDonorData @ main.029a981975f1c353f749.hot-update.js:50
-:8090/donor/1:1 
-        
-        
-       Failed to load resource: the server responded with a status of 500 ()
-main.029a981975f1c353f749.hot-update.js:50 Fetch error: AxiosError
-fetchDonorData @ main.029a981975f1c353f749.hot-update.js:50
-:8090/donor/1:1 
-        
-        
-       Failed to load resource: the server responded with a status of 500 ()
-main.e0efc8aef3873bc5c876.hot-update.js:50 Fetch error: AxiosError
-fetchDonorData @ main.e0efc8aef3873bc5c876.hot-update.js:50
-DonorService.js:6 
-        
-        
-       GET http://localhost:8090/donor/1 500 (Internal Server Error)
-dispatchXhrRequest @ xhr.js:209
-xhr @ adapters.js:77
-dispatchRequest @ buildFullPath.js:21
-_request @ Axios.js:113
-request @ isCancel.js:5
-Axios.<computed> @ Axios.js:140
-wrap @ HttpStatusCode.js:44
-viewDonorById @ DonorService.js:6
-fetchDonorData @ main.fdef82b4ba1bca868f6e.hot-update.js:43
-(anonymous) @ main.fdef82b4ba1bca868f6e.hot-update.js:54
-commitHookEffectListMount @ react-dom.development.js:23096
-commitPassiveMountOnFiber @ react-dom.development.js:24871
-commitPassiveMountEffects_complete @ react-dom.development.js:24835
-commitPassiveMountEffects_begin @ react-dom.development.js:24824
-commitPassiveMountEffects @ react-dom.development.js:24813
-flushPassiveEffectsImpl @ react-dom.development.js:26987
-flushPassiveEffects @ react-dom.development.js:26931
-commitRootImpl @ react-dom.development.js:26883
-commitRoot @ react-dom.development.js:26629
-performSyncWorkOnRoot @ react-dom.development.js:26063
-flushSyncCallbacks @ react-dom.development.js:11994
-flushSync @ react-dom.development.js:26152
-scheduleRefresh @ react-dom.development.js:27743
-(anonymous) @ react-refresh-runtime.development.js:250
-performReactRefresh @ react-refresh-runtime.development.js:241
-(anonymous) @ RefreshUtils.js:54
-setTimeout (async)
-enqueueUpdate @ RefreshUtils.js:51
-executeRuntime @ RefreshUtils.js:200
-$ReactRefreshModuleRuntime$ @ main.fdef82b4ba1bca868f6e.hot-update.js:249
-./src/components/DonorProfile.js @ main.fdef82b4ba1bca868f6e.hot-update.js:262
-options.factory @ hot module replacement:359
-__webpack_require__ @ utils.js:707
-_requireSelf @ hot module replacement:57
-apply @ jsonp chunk loading:400
-(anonymous) @ hot module replacement:298
-internalApply @ hot module replacement:296
-(anonymous) @ hot module replacement:233
-waitForBlockingPromises @ hot module replacement:188
-(anonymous) @ hot module replacement:231
-Promise.then (async)
-(anonymous) @ hot module replacement:230
-Promise.then (async)
-(anonymous) @ hot module replacement:211
-Promise.then (async)
-hotCheck @ hot module replacement:202
-check @ sendMessage.js:16
-(anonymous) @ dev-server.js:4
-emit @ events.js:95
-reloadApp @ parseURL.js:36
-warnings @ index.js:230
-(anonymous) @ socket.js:18
-client.onmessage @ WebSocketClient.js:5
-Show 33 more frames
-Show less
-main.fdef82b4ba1bca868f6e.hot-update.js:51 Fetch error: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-fetchDonorData @ main.fdef82b4ba1bca868f6e.hot-update.js:51
-await in fetchDonorData (async)
-(anonymous) @ main.fdef82b4ba1bca868f6e.hot-update.js:54
-commitHookEffectListMount @ react-dom.development.js:23096
-commitPassiveMountOnFiber @ react-dom.development.js:24871
-commitPassiveMountEffects_complete @ react-dom.development.js:24835
-commitPassiveMountEffects_begin @ react-dom.development.js:24824
-commitPassiveMountEffects @ react-dom.development.js:24813
-flushPassiveEffectsImpl @ react-dom.development.js:26987
-flushPassiveEffects @ react-dom.development.js:26931
-commitRootImpl @ react-dom.development.js:26883
-commitRoot @ react-dom.development.js:26629
-performSyncWorkOnRoot @ react-dom.development.js:26063
-flushSyncCallbacks @ react-dom.development.js:11994
-flushSync @ react-dom.development.js:26152
-scheduleRefresh @ react-dom.development.js:27743
-(anonymous) @ react-refresh-runtime.development.js:250
-performReactRefresh @ react-refresh-runtime.development.js:241
-(anonymous) @ RefreshUtils.js:54
-setTimeout (async)
-enqueueUpdate @ RefreshUtils.js:51
-executeRuntime @ RefreshUtils.js:200
-$ReactRefreshModuleRuntime$ @ main.fdef82b4ba1bca868f6e.hot-update.js:249
-./src/components/DonorProfile.js @ main.fdef82b4ba1bca868f6e.hot-update.js:262
-options.factory @ hot module replacement:359
-__webpack_require__ @ utils.js:707
-_requireSelf @ hot module replacement:57
-apply @ jsonp chunk loading:400
-(anonymous) @ hot module replacement:298
-internalApply @ hot module replacement:296
-(anonymous) @ hot module replacement:233
-waitForBlockingPromises @ hot module replacement:188
-(anonymous) @ hot module replacement:231
-Promise.then (async)
-(anonymous) @ hot module replacement:230
-Promise.then (async)
-(anonymous) @ hot module replacement:211
-Promise.then (async)
-hotCheck @ hot module replacement:202
-check @ sendMessage.js:16
-(anonymous) @ dev-server.js:4
-emit @ events.js:95
-reloadApp @ parseURL.js:36
-warnings @ index.js:230
-(anonymous) @ socket.js:18
-client.onmessage @ WebSocketClient.js:5
-Show 26 more frames
-Show less
-DonorService.js:6 
-        
-        
-       GET http://localhost:8090/donor/1 500 (Internal Server Error)
-dispatchXhrRequest @ xhr.js:209
-xhr @ adapters.js:77
-dispatchRequest @ buildFullPath.js:21
-_request @ Axios.js:113
-request @ isCancel.js:5
-Axios.<computed> @ Axios.js:140
-wrap @ HttpStatusCode.js:44
-viewDonorById @ DonorService.js:6
-fetchDonorData @ DonorProfile.js:21
-(anonymous) @ DonorProfile.js:33
-commitHookEffectListMount @ react-dom.development.js:23096
-commitPassiveMountOnFiber @ react-dom.development.js:24871
-commitPassiveMountEffects_complete @ react-dom.development.js:24835
-commitPassiveMountEffects_begin @ react-dom.development.js:24824
-commitPassiveMountEffects @ react-dom.development.js:24813
-flushPassiveEffectsImpl @ react-dom.development.js:26987
-flushPassiveEffects @ react-dom.development.js:26931
-commitRootImpl @ react-dom.development.js:26883
-commitRoot @ react-dom.development.js:26629
-performSyncWorkOnRoot @ react-dom.development.js:26063
-flushSyncCallbacks @ react-dom.development.js:11994
-flushSync @ react-dom.development.js:26152
-scheduleRefresh @ react-dom.development.js:27743
-(anonymous) @ react-refresh-runtime.development.js:250
-performReactRefresh @ react-refresh-runtime.development.js:241
-(anonymous) @ RefreshUtils.js:54
-setTimeout (async)
-enqueueUpdate @ RefreshUtils.js:51
-executeRuntime @ RefreshUtils.js:200
-$ReactRefreshModuleRuntime$ @ main.a91d32258cad9c56d948.hot-update.js:249
-./src/components/DonorProfile.js @ main.a91d32258cad9c56d948.hot-update.js:262
-options.factory @ hot module replacement:359
-__webpack_require__ @ utils.js:707
-_requireSelf @ hot module replacement:57
-apply @ jsonp chunk loading:400
-(anonymous) @ hot module replacement:298
-internalApply @ hot module replacement:296
-(anonymous) @ hot module replacement:233
-waitForBlockingPromises @ hot module replacement:188
-(anonymous) @ hot module replacement:231
-Promise.then (async)
-(anonymous) @ hot module replacement:230
-Promise.then (async)
-(anonymous) @ hot module replacement:211
-Promise.then (async)
-hotCheck @ hot module replacement:202
-check @ sendMessage.js:16
-(anonymous) @ dev-server.js:4
-emit @ events.js:95
-reloadApp @ parseURL.js:36
-warnings @ index.js:230
-(anonymous) @ socket.js:18
-client.onmessage @ WebSocketClient.js:5
-Show 33 more frames
-Show less
-DonorProfile.js:29 Fetch error: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DonorService from '../services/DonorService';
-
 
 function DonorProfile() {
   const [user, setUser] = useState({
     id: '',
     name: '',
+    email: '', // Add email property
     newName: '',
     password: '',
     newPassword: '',
@@ -225,8 +21,8 @@ function DonorProfile() {
           const userData = await DonorService.viewDonorById(storedUser.id);
           setUser({
             ...storedUser,
-            name:storedUser.name,
-            email:storedUser.email,
+            name: storedUser.name,
+            email: storedUser.email,
           });
         }
       } catch (error) {
@@ -298,7 +94,7 @@ function DonorProfile() {
       <hr />
       <div className="detail">
         <h2>Name: {user.name}</h2>
-        <h2>Email id: {user.email}</h2>
+        <h2>Email: {user.email}</h2>
       </div>
       <form onSubmit={handleUpdateName}>
         <label>

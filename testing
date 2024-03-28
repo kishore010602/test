@@ -220,3 +220,11 @@ export default FundraiserProfile;
         this.donorRepositoryDao.deleteById(id);
         return "Profile deleted successfully!!";
     }
+import { axiosInstance } from "./axios-http-client";
+
+const API_URL = 'http://localhost:8090/';
+
+class PostService {
+  getCompletedPosts() {
+    return axiosInstance.get(API_URL + 'posts/complete');
+  }

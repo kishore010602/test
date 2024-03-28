@@ -1,41 +1,42 @@
-import {Outlet,Link} from "react-router-dom"
+import { Outlet, Link } from "react-router-dom";
 import './Layout.css';
 
 function Layout() {
     return (
         <>
-      <nav>
-        <ul>
-        <li>
-            <Link to="/profile">Profile</Link>
-          </li>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/posts">Posts</Link>
-          </li>
-          <li>
-            <Link to="/test">Test</Link>
-          </li>
-          <li>
-            <Link to="/signup">FundRaiserSignup</Link>
-          </li>
-          <li>
-            <Link to="/login">FundRaiserLogin</Link>
-          </li>
-          <li>
-            <Link to="/donor-login">Donor Login</Link>
-          </li>
-          <li>
-            <Link to="/donor-signup">Donor SignUp</Link>
-          </li>
-        </ul>
-      </nav>
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li>
+                        <Link to="/profile">My Profile</Link>
+                    </li>
+                    <li>
+                        <Link to="/posts">Posts</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">Login</Link>
+                        <ul>
+                            <li>
+                                <Link to="/fundraiser-login">Fundraiser Login</Link>
+                            </li>
+                            <li>
+                                <Link to="/fundraiser-signup">Fundraiser Signup</Link>
+                            </li>
+                            <li>
+                                <Link to="/donor-login">Donor Login</Link>
+                            </li>
+                            <li>
+                                <Link to="/donor-signup">Donor Signup</Link>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
 
-        <Outlet></Outlet>
+            <Outlet />
         </>
-
     );
 }
 

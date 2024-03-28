@@ -1,71 +1,167 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DonorService from '../services/DonorService';
+
+function DonorProfile() {
+    const donorService=new DonorService();
+    const [user, setUser] = useState({
+    id: '',
+    name: '',
+    email: '', 
+    newName: '',
+    password: '',
+    newPassword: '',
+    DonorAcc:'',
+    DonorBalance:'',
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchDonorData = async () => {
+      try {
+        const storedUser = JSON.parse(sessionStorage.getItem('user'));
+        if (storedUser) {
+          const userData = await donorService.viewDonorById(storedUser.id);
+          setUser({
+            ...storedUser,
+            name: storedUser.name,
+            email: storedUser.email,
+          });
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    };
+
+    fetchDonorData();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateName = async (e) => {
+    e.preventDefault();
+
+    try {
+      await DonorService.updateDonorNameById(user.id, user.newName);
+      setUser((prevUser) => ({
+        ...prevUser,
+        name: user.newName,
+        newName: '',
+      }));
+      alert('Name updated successfully');
+    } catch (error) {
+      console.error('Update error:', error);
+    }
+  };
+
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+
+    try {
+      await DonorService.updateDonorPasswordById(user.id, user.newPassword);
+      setUser((prevUser) => ({
+        ...prevUser,
+        newPassword: '',
+      }));
+      alert('Password updated successfully');
+    } catch (error) {
+      console.error('Update error:', error);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      await DonorService.deleteDonorById(user.id);
+      sessionStorage.clear();
+      alert('Account deleted successfully');
+      navigate('/login');
+    } catch (error) {
+      console.error('Deletion error:', error);
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate('/login');
+  };
+
+  return (
+    <div>
+      <h1 className="Heading">Donor Profile</h1>
+      <hr />
+      <div className="detail">
+        <h2>Name: {user.name}</h2>
+        <h2>Email: {user.email}</h2>
+      </div>
+      <form onSubmit={handleUpdateName}>
+        <label>
+          New Name:
+          <input
+            type="text"
+            name="newName"
+            value={user.newName}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Update Name</button>
+      </form>
+      <form onSubmit={handleUpdatePassword}>
+        <label>
+          New Password:
+          <input
+            type="password"
+            name="newPassword"
+            value={user.newPassword}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Update Password</button>
+      </form>
+      <div className="button-container">
+        <button onClick={handleDeleteAccount} className="delete-account">
+          Delete Account
+        </button>
+        <button onClick={handleLogout} className="logbutton">
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default DonorProfile;
+import {axiosInstance} from "./axios-http-client"; 
+const API_URL = 'http://localhost:8090/';
+
+class DonorService {
+  viewDonorById(id) {
+    return axiosInstance.get(API_URL + `donor/${id}`);
+  }
+
+  updateDonorNameById(id, newName) {
+    return axiosInstance.patch(API_URL + `donor/${id}/name`, { newName });
+  }
+
+  updateDonorEmailById(id, newEmail) {
+    return axiosInstance.patch(API_URL + `donor/${id}/email`, { newEmail });
+  }
+
+  updateDonorPasswordById(id, newPassword) {
+    return axiosInstance.patch(API_URL + `donor/${id}/password`, { newPassword });
+  }
+
+  deleteDonorById(id) {
+    return axiosInstance.delete(API_URL + `donor/${id}`);
+  }
+}
+
+export default new DonorService();
 
 
 
-GET http://localhost:8090/donor/1 500 (Internal Server Error)
-dispatchXhrRequest @ xhr.js:258
-xhr @ xhr.js:49
-dispatchRequest @ dispatchRequest.js:51
-_request @ Axios.js:170
-request @ Axios.js:40
-Axios.<computed> @ Axios.js:196
-wrap @ bind.js:5
-viewDonorById @ DonorService.js:6
-fetchDonorData @ DonorProfile.js:21
-(anonymous) @ DonorProfile.js:33
-commitHookEffectListMount @ react-dom.development.js:23150
-commitPassiveMountOnFiber @ react-dom.development.js:24926
-commitPassiveMountEffects_complete @ react-dom.development.js:24891
-commitPassiveMountEffects_begin @ react-dom.development.js:24878
-commitPassiveMountEffects @ react-dom.development.js:24866
-flushPassiveEffectsImpl @ react-dom.development.js:27039
-flushPassiveEffects @ react-dom.development.js:26984
-(anonymous) @ react-dom.development.js:26769
-workLoop @ scheduler.development.js:266
-flushWork @ scheduler.development.js:239
-performWorkUntilDeadline @ scheduler.development.js:533
-Show 18 more frames
-Show less
-DonorProfile.js:29 Fetch error: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
-fetchDonorData @ DonorProfile.js:29
-await in fetchDonorData (async)
-(anonymous) @ DonorProfile.js:33
-commitHookEffectListMount @ react-dom.development.js:23150
-commitPassiveMountOnFiber @ react-dom.development.js:24926
-commitPassiveMountEffects_complete @ react-dom.development.js:24891
-commitPassiveMountEffects_begin @ react-dom.development.js:24878
-commitPassiveMountEffects @ react-dom.development.js:24866
-flushPassiveEffectsImpl @ react-dom.development.js:27039
-flushPassiveEffects @ react-dom.development.js:26984
-(anonymous) @ react-dom.development.js:26769
-workLoop @ scheduler.development.js:266
-flushWork @ scheduler.development.js:239
-performWorkUntilDeadline @ scheduler.development.js:533
-Show 11 more frames
-Show less
-DonorService.js:6 
-        
-        
-       GET http://localhost:8090/donor/1 500 (Internal Server Error)
-dispatchXhrRequest @ xhr.js:258
-xhr @ xhr.js:49
-dispatchRequest @ dispatchRequest.js:51
-_request @ Axios.js:170
-request @ Axios.js:40
-Axios.<computed> @ Axios.js:196
-wrap @ bind.js:5
-viewDonorById @ DonorService.js:6
-fetchDonorData @ DonorProfile.js:21
-(anonymous) @ DonorProfile.js:33
-commitHookEffectListMount @ react-dom.development.js:23150
-invokePassiveEffectMountInDEV @ react-dom.development.js:25154
-invokeEffectsInDev @ react-dom.development.js:27351
-commitDoubleInvokeEffectsInDEV @ react-dom.development.js:27330
-flushPassiveEffectsImpl @ react-dom.development.js:27056
-flushPassiveEffects @ react-dom.development.js:26984
-(anonymous) @ react-dom.development.js:26769
-workLoop @ scheduler.development.js:266
-flushWork @ scheduler.development.js:239
-performWorkUntilDeadline @ scheduler.development.js:533
-Show 17 more frames
-Show less
-DonorProfile.js:29 Fetch error: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}

@@ -1,14 +1,29 @@
-useEffect(() => {
+const handleUpdateName = async (e) => {
+  e.preventDefault();
+
+  try {
     const storedUser = JSON.parse(sessionStorage.getItem('user'));
-    const fetchDonorData = async () => {
-      try {
-        const response = await donorService.viewDonorById(storedUser.id);
-        setUser({
-          ...user,
-          name: response.data.name,
-          email: response.data.email,
-        });
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    };
+    const response = await donorService.updateDonorNameById(storedUser.id, user.newName);
+    
+    if (response.status === 200) {
+      // Update the user name in session storage
+      const updatedUser = { ...storedUser, name: user.newName };
+      sessionStorage.setItem('user', JSON.stringify(updatedUser));
+
+      // Update the user name in state
+      setUser((prevUser) => ({
+        ...prevUser,
+        name: user.newName,
+        newName: '', // Clear the newName field
+      }));
+
+      alert('Name updated successfully');
+    } else {
+      console.error('Update error:', response.statusText);
+      alert('Failed to update name');
+    }
+  } catch (error) {
+    console.error('Update error:', error);
+    alert('Failed to update name');
+  }
+};

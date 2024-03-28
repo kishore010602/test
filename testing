@@ -1,136 +1,35 @@
-// DonorProfile.js
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import donorService from './donorService'; // Importing the donor service
-import './DonorProfile.css';
-
-function DonorProfile() {
-  const [user, setUser] = useState({
-    id: '',
-    name: '',
-    newName: '',
-    password: '',
-    newPassword: '',
-  });
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchDonorData = async () => {
-      try {
-        const storedUser = JSON.parse(sessionStorage.getItem('user'));
-        if (storedUser) {
-          const userData = await donorService.viewDonorById(storedUser.id);
-          setUser({
-            ...storedUser,
-            name: userData.data.name,
-          });
-        }
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    };
-
-    fetchDonorData();
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
-  };
-
-  const handleUpdateName = async (e) => {
-    e.preventDefault();
-
-    try {
-      await donorService.updateDonorNameById(user.id, user.newName);
-      setUser((prevUser) => ({
-        ...prevUser,
-        name: user.newName,
-        newName: '',
-      }));
-      alert('Name updated successfully');
-    } catch (error) {
-      console.error('Update error:', error);
-    }
-  };
-
-  const handleUpdatePassword = async (e) => {
-    e.preventDefault();
-
-    try {
-      await donorService.updateDonorPasswordById(user.id, user.newPassword);
-      setUser((prevUser) => ({
-        ...prevUser,
-        newPassword: '',
-      }));
-      alert('Password updated successfully');
-    } catch (error) {
-      console.error('Update error:', error);
-    }
-  };
-
-  const handleDeleteAccount = async () => {
-    try {
-      await donorService.deleteDonorById(user.id);
-      sessionStorage.clear();
-      alert('Account deleted successfully');
-      navigate('/login');
-    } catch (error) {
-      console.error('Deletion error:', error);
-    }
-  };
-
-  const handleLogout = () => {
-    sessionStorage.clear();
-    navigate('/login');
-  };
-
-  return (
-    <div>
-      <h1 className="Heading">Donor Profile</h1>
-      <hr />
-      <div className="detail">
-        <h2>Name: {user.name}</h2>
-        {/* Add more details as needed */}
-      </div>
-      <form onSubmit={handleUpdateName}>
-        <label>
-          New Name:
-          <input
-            type="text"
-            name="newName"
-            value={user.newName}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Update Name</button>
-      </form>
-      <form onSubmit={handleUpdatePassword}>
-        <label>
-          New Password:
-          <input
-            type="password"
-            name="newPassword"
-            value={user.newPassword}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Update Password</button>
-      </form>
-      <div className="button-container">
-        <button onClick={handleDeleteAccount} className="delete-account">
-          Delete Account
-        </button>
-        <button onClick={handleLogout} className="logbutton">
-          Logout
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export default DonorProfile;
+react-dom.development.js:37 Warning: A component is changing a controlled input to be uncontrolled. This is likely caused by the value changing from a defined to undefined, which should not happen. Decide between using a controlled or uncontrolled input element for the lifetime of the component. More info: https://reactjs.org/link/controlled-components
+    at input
+    at label
+    at form
+    at div
+    at DonorProfile (http://localhost:3000/static/js/bundle.js:913:74)
+    at Profile (http://localhost:3000/static/js/bundle.js:3092:81)
+    at RenderedRoute (http://localhost:3000/static/js/bundle.js:42215:5)
+    at Outlet (http://localhost:3000/static/js/bundle.js:42819:26)
+    at Layout
+    at RenderedRoute (http://localhost:3000/static/js/bundle.js:42215:5)
+    at Routes (http://localhost:3000/static/js/bundle.js:42906:5)
+    at Router (http://localhost:3000/static/js/bundle.js:42840:15)
+    at BrowserRouter (http://localhost:3000/static/js/bundle.js:40793:5)
+    at App
+printWarning @ react-dom.development.js:37
+Show 1 more frame
+Show less
+:8090/donor/1:1 
+        
+        
+       Failed to load resource: the server responded with a status of 500 ()
+main.029a981975f1c353f749.hot-update.js:50 Fetch error: AxiosError
+fetchDonorData @ main.029a981975f1c353f749.hot-update.js:50
+:8090/donor/1:1 
+        
+        
+       Failed to load resource: the server responded with a status of 500 ()
+main.029a981975f1c353f749.hot-update.js:50 Fetch error: AxiosError
+fetchDonorData @ main.029a981975f1c353f749.hot-update.js:50
+:8090/donor/1:1 
+        
+        
+       Failed to load resource: the server responded with a status of 500 ()
+DonorProfile.js:28 Fetch error: AxiosError

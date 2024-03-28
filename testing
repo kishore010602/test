@@ -1,103 +1,222 @@
 import React, { useState, useEffect } from 'react';
-import PostService from '../services/PostService';
-import './Post.css';
+import { useNavigate } from 'react-router-dom';
+import './FundRaiserProfile.css'
 
-const Post = () => {
-  const [posts, setPosts] = useState([]);
+function FundraiserProfile() {
+  const [user, setUser] = useState({
+    id: '', 
+    name: '',
+    newName: '', 
+    password:'',
+    newPassword:'',
+  });
+  const navigate = useNavigate();
   
-  const postService = new PostService();
-
-  const getPosts = async () => {
-    try {
-      const { data } = await postService.getAllPosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts:', error);
-    }
-  };
-
-  const getPostsByCategory = async (category) => {
-    try {
-      const { data } = await postService.getPostsByCategory(category);
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts by category:', error);
-    }
-  };
-
-  const getPostsSortedByDate = async () => {
-    try {
-      const { data } = await postService.getPostsSortedByDate();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching posts sorted by date:', error);
-    }
-  };
-
-  const getCompletedPosts = async () => {
-    try {
-      const { data } = await postService.getCompletedPosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching completed posts:', error);
-    }
-  };
-
-  const getIncompletePosts = async () => {
-    try {
-      const { data } = await postService.getIncompletePosts();
-      setPosts(data);
-    } catch (error) {
-      console.error('Error fetching incompleted posts:', error);
-    }
-  };
-
   useEffect(() => {
-    getPosts();
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    if (user) {
+      setUser({
+        ...user,
+        id: user.id, 
+        newName: user.newName,
+        newPassword:user.newPassword,
+      });
+    }
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateName = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const url = `http://localhost:8090/fundraiser/name?id=${encodeURIComponent(user.id)}&newName=${encodeURIComponent(user.newName)}`;
+      const response = await fetch(url, {
+        method: 'PATCH',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update user data');
+      }
+
+      const data = await response.json();
+      let user2 = {
+        id:data.id,
+        name:data.name,
+        email:data.email,
+        role:"fundraiser"
+      };
+      sessionStorage.setItem("user", JSON.stringify(user2));
+      setUser(user2);
+      alert('User name updated successfully');
+      
+      setUser((prevUser) => ({
+        ...prevUser,
+        newName: '',
+      }));
+      
+    } catch (error) {
+      console.error('Update error:', error);
+    }
+  };
+  
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+    //console.log(user);
+    try {
+      const url = `http://localhost:8090/fundraiser/password?id=${encodeURIComponent(user.id)}`;
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: { // 1
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            password: user.newPassword, 
+          }),
+      });
+      
+      console.log("============");
+      if (!response.ok) {
+        throw new Error('Failed to update user data');
+      }
+
+      alert('User password updated successfully');
+     
+      setUser((prevUser) => ({
+        ...prevUser,
+        newPassword: '',
+      }));
+      
+    } catch (error) {
+      console.error('Update error:', error);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await fetch('http://localhost:8090/fundraiser', {
+        method: 'DELETE', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete user account');
+      }
+
+      alert('User account deleted successfully');
+      sessionStorage.clear(); 
+    } catch (error) {
+      console.error('Deletion error:', error);
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate('/login');
+  };
 
 
   return (
-    <div className="post-container">
-      <div className="button-container">
-        <button className="filter-button" onClick={getPosts}>All Posts</button>
-        <button className="filter-button" onClick={getPostsSortedByDate}>Recent Posts</button>
-        <button className="filter-button" onClick={getIncompletePosts}>Donatable Posts</button>
-        <button className="filter-button" onClick={getCompletedPosts}>Completed Donations</button>
-        <select className="form-select" name="Categories" onChange={(e) => getPostsByCategory(e.target.value)}>
-          <option value="">All Categories</option>
-          <option value="education">Education</option>
-          <option value="food">Food</option>
-          <option value="medical">Medical</option>
-        </select>
+    <div>
+      <h1 className='Heading'>Fundraiser Profile</h1><hr/>
+      <div className='detail'> 
+      <h2>Name :{user.name}</h2>
+      <h2>Email ID: {user.email}</h2>
+     
       </div>
-
-      <div className="post-grid">
-        {posts.map((post) => (
-          <div className="post-box" key={post.id || post._id}>
-            <img
-              src={
-                post.category === 'food' ? 'assets/images/food.jpg' :
-                post.category === 'medical' ? 'assets/images/medical.jpg' :
-                post.category === 'education' ? 'assets/images/education2.png' :
-                ''
-              }
-              alt={post.category + ' Donation'}
-            />
-            <h4>{post.title}</h4>
-            <p><strong>Category:</strong> {post.category}</p>
-            <p><strong>Start Date:</strong> {post.startDate}</p>
-            <p><strong>End Date:</strong> {post.endDate}</p>
-            <p><strong>Amount Requested:</strong> {post.amountRequested}</p>
-            <p><strong>Amount Collected:</strong> {post.amountCollected || '0'}</p>
-            <p><strong>Status:</strong> {post.status}</p>
-            {post.status === 'incomplete' && <button className='button-group'>Donate</button>}
-            <button className='button-group'>View Donation Details</button>
-          </div>
-        ))}
+      <form onSubmit={handleUpdateName}>
+        <label>
+          Username:
+          <input
+            type="text"
+            name="newName"
+            value={user.newName}
+            onChange={handleChange}
+          />
+        </label>
+        
+        <button type="submit">Update Name</button>
+      </form>
+      <form onSubmit={handleUpdatePassword}>
+        <label>
+          Password:
+          <input
+            type="text"
+            name="newPassword"
+            value={user.newPassword}
+            onChange={handleChange}
+          />
+        </label>
+        
+        <button type="submit">Update password</button>
+        
+      </form>
+      <div className='button-container'>
+      <button onClick={handleDeleteAccount} className='delete-account'>Delete Account</button>
+      <button onClick={handleLogout} className='logbutton'>Logout</button>
       </div>
     </div>
   );
-};
+}
 
-export default Post;
+export default FundraiserProfile;
+@Override
+    public Donor viewDonorById(Integer id) throws DonorExceptions {
+        if(id==null)
+            throw new DonorExceptions("Id should not be null");
+        Optional<Donor> donorOpt=this.donorRepositoryDao.findById(id);
+        if(donorOpt.isEmpty())
+            throw new DonorExceptions("Profile doesn't exists:"+id);
+        Donor foundDonor=donorOpt.get();
+        return foundDonor;
+    }
+
+    @Override
+    public Donor updateDonorNameById(Integer id,String newName) throws DonorExceptions {
+        Optional<Donor> donorOpt=this.donorRepositoryDao.findById(id);
+        if(donorOpt.isEmpty())
+            throw new DonorExceptions("Profile doesn't exists:"+id);
+        Donor foundDonor=donorOpt.get();
+        foundDonor.setName(newName);
+        this.donorRepositoryDao.save(foundDonor);
+        return foundDonor;
+    }
+
+    @Override
+    public Donor updateDonorEmailById(Integer id,String newEmail) throws DonorExceptions {
+        Optional<Donor> donorOpt=this.donorRepositoryDao.findById(id);
+        if(donorOpt.isEmpty())
+            throw new DonorExceptions("Profile doesn't exists:"+id);
+        Donor foundDonor=donorOpt.get();
+        foundDonor.setEmail(newEmail);
+        this.donorRepositoryDao.save(foundDonor);
+        return foundDonor;
+    }
+
+    @Override
+    public Donor updateDonorPasswordById(Integer id,String newPassword) throws DonorExceptions {
+        Optional<Donor> donorOpt=this.donorRepositoryDao.findById(id);
+        if(donorOpt.isEmpty())
+            throw new DonorExceptions("Profile doesn't exists:"+id);
+        Donor foundDonor=donorOpt.get();
+        foundDonor.setPassword(newPassword);
+        this.donorRepositoryDao.save(foundDonor);
+        return foundDonor;
+    }
+
+    @Override
+    public String deleteDonorById(Integer id) throws DonorExceptions {
+        Optional<Donor> donorOpt=this.donorRepositoryDao.findById(id);
+        if(donorOpt.isEmpty())
+            throw new DonorExceptions("Profile doesn't exists:"+id);
+        this.donorRepositoryDao.deleteById(id);
+        return "Profile deleted successfully!!";
+    }

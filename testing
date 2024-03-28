@@ -1,96 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import donorService from '../services/DonorService';
 
-function DonorProfile() {
-  const [user, setUser] = useState({
-    id: '',
-    name: '',
-    email: '',
-    newName: '',
-    newPassword: '',
-  });
-  const navigate = useNavigate();
+import { axiosInstance } from "./axios-http-client";
+const API_URL = 'http://localhost:8090/';
 
-  useEffect(() => {
-    const storedUser = JSON.parse(sessionStorage.getItem('user'));
-    const fetchDonorData = async () => {
-      try {
-        const response = await donorService.viewDonorById(storedUser.id);
-        setUser({
-          ...user,
-          name: response.data.name,
-          email: response.data.email,
-        });
-      } catch (error) {
-        console.error('Fetch error:', error);
-      }
-    };
+class DonorService {
+  viewDonorById(id) {
+    return axiosInstance.get(`${API_URL}donor/id?id=${encodeURIComponent(id)}`);
+  }
 
-    fetchDonorData();
-  }, []);
-const handleDeleteAccount = () => {
-    donorService.deleteDonorById(user.id)
-      .then(() => {
-        sessionStorage.clear();
-        alert('Account deleted successfully');
-        navigate('/login');
-      })
-      .catch((error) => {
-        console.error('Deletion error:', error);
-      });
-  };
-
-  const handleLogout = () => {
-    sessionStorage.clear();
-    navigate('/login');
-  };
-
-  return (
-    <div>
-      <h1 className="Heading">Donor Profile</h1>
-      <hr />
-      <div className="detail">
-        <h2>Name: {user.name}</h2>
-        <h2>Email: {user.email}</h2>
-      </div>
-      <form onSubmit={handleUpdateName}>
-        <label>
-          New Name:
-          <input
-            className='form-control'
-            type="text"
-            name="newName"
-            value={user.newName}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Update Name</button>
-      </form>
-      <form onSubmit={handleUpdatePassword}>
-        <label>
-          New Password:
-          <input
-            type="password"
-            name="newPassword"
-            className='form-control'
-            value={user.newPassword}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit">Update Password</button>
-      </form>
-      <div className="button-container">
-        <button onClick={handleDeleteAccount} className="delete-account">
-          Delete Account
-        </button>
-        <button onClick={handleLogout} className="logbutton">
-          Logout
-        </button>
-        <p>Account Number: {user.id}</p>
-      </div>
-    </div>
-  );
+  
+  deleteDonorById(id) {
+    return axiosInstance.delete(`${API_URL}donor/${id}`);
+  }
 }
 
-export default DonorProfile;    
+export default new DonorService();

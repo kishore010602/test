@@ -32,4 +32,308 @@ fetchDonorData @ main.029a981975f1c353f749.hot-update.js:50
         
         
        Failed to load resource: the server responded with a status of 500 ()
-DonorProfile.js:28 Fetch error: AxiosError
+main.e0efc8aef3873bc5c876.hot-update.js:50 Fetch error: AxiosError
+fetchDonorData @ main.e0efc8aef3873bc5c876.hot-update.js:50
+DonorService.js:6 
+        
+        
+       GET http://localhost:8090/donor/1 500 (Internal Server Error)
+dispatchXhrRequest @ xhr.js:209
+xhr @ adapters.js:77
+dispatchRequest @ buildFullPath.js:21
+_request @ Axios.js:113
+request @ isCancel.js:5
+Axios.<computed> @ Axios.js:140
+wrap @ HttpStatusCode.js:44
+viewDonorById @ DonorService.js:6
+fetchDonorData @ main.fdef82b4ba1bca868f6e.hot-update.js:43
+(anonymous) @ main.fdef82b4ba1bca868f6e.hot-update.js:54
+commitHookEffectListMount @ react-dom.development.js:23096
+commitPassiveMountOnFiber @ react-dom.development.js:24871
+commitPassiveMountEffects_complete @ react-dom.development.js:24835
+commitPassiveMountEffects_begin @ react-dom.development.js:24824
+commitPassiveMountEffects @ react-dom.development.js:24813
+flushPassiveEffectsImpl @ react-dom.development.js:26987
+flushPassiveEffects @ react-dom.development.js:26931
+commitRootImpl @ react-dom.development.js:26883
+commitRoot @ react-dom.development.js:26629
+performSyncWorkOnRoot @ react-dom.development.js:26063
+flushSyncCallbacks @ react-dom.development.js:11994
+flushSync @ react-dom.development.js:26152
+scheduleRefresh @ react-dom.development.js:27743
+(anonymous) @ react-refresh-runtime.development.js:250
+performReactRefresh @ react-refresh-runtime.development.js:241
+(anonymous) @ RefreshUtils.js:54
+setTimeout (async)
+enqueueUpdate @ RefreshUtils.js:51
+executeRuntime @ RefreshUtils.js:200
+$ReactRefreshModuleRuntime$ @ main.fdef82b4ba1bca868f6e.hot-update.js:249
+./src/components/DonorProfile.js @ main.fdef82b4ba1bca868f6e.hot-update.js:262
+options.factory @ hot module replacement:359
+__webpack_require__ @ utils.js:707
+_requireSelf @ hot module replacement:57
+apply @ jsonp chunk loading:400
+(anonymous) @ hot module replacement:298
+internalApply @ hot module replacement:296
+(anonymous) @ hot module replacement:233
+waitForBlockingPromises @ hot module replacement:188
+(anonymous) @ hot module replacement:231
+Promise.then (async)
+(anonymous) @ hot module replacement:230
+Promise.then (async)
+(anonymous) @ hot module replacement:211
+Promise.then (async)
+hotCheck @ hot module replacement:202
+check @ sendMessage.js:16
+(anonymous) @ dev-server.js:4
+emit @ events.js:95
+reloadApp @ parseURL.js:36
+warnings @ index.js:230
+(anonymous) @ socket.js:18
+client.onmessage @ WebSocketClient.js:5
+Show 33 more frames
+Show less
+main.fdef82b4ba1bca868f6e.hot-update.js:51 Fetch error: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+fetchDonorData @ main.fdef82b4ba1bca868f6e.hot-update.js:51
+await in fetchDonorData (async)
+(anonymous) @ main.fdef82b4ba1bca868f6e.hot-update.js:54
+commitHookEffectListMount @ react-dom.development.js:23096
+commitPassiveMountOnFiber @ react-dom.development.js:24871
+commitPassiveMountEffects_complete @ react-dom.development.js:24835
+commitPassiveMountEffects_begin @ react-dom.development.js:24824
+commitPassiveMountEffects @ react-dom.development.js:24813
+flushPassiveEffectsImpl @ react-dom.development.js:26987
+flushPassiveEffects @ react-dom.development.js:26931
+commitRootImpl @ react-dom.development.js:26883
+commitRoot @ react-dom.development.js:26629
+performSyncWorkOnRoot @ react-dom.development.js:26063
+flushSyncCallbacks @ react-dom.development.js:11994
+flushSync @ react-dom.development.js:26152
+scheduleRefresh @ react-dom.development.js:27743
+(anonymous) @ react-refresh-runtime.development.js:250
+performReactRefresh @ react-refresh-runtime.development.js:241
+(anonymous) @ RefreshUtils.js:54
+setTimeout (async)
+enqueueUpdate @ RefreshUtils.js:51
+executeRuntime @ RefreshUtils.js:200
+$ReactRefreshModuleRuntime$ @ main.fdef82b4ba1bca868f6e.hot-update.js:249
+./src/components/DonorProfile.js @ main.fdef82b4ba1bca868f6e.hot-update.js:262
+options.factory @ hot module replacement:359
+__webpack_require__ @ utils.js:707
+_requireSelf @ hot module replacement:57
+apply @ jsonp chunk loading:400
+(anonymous) @ hot module replacement:298
+internalApply @ hot module replacement:296
+(anonymous) @ hot module replacement:233
+waitForBlockingPromises @ hot module replacement:188
+(anonymous) @ hot module replacement:231
+Promise.then (async)
+(anonymous) @ hot module replacement:230
+Promise.then (async)
+(anonymous) @ hot module replacement:211
+Promise.then (async)
+hotCheck @ hot module replacement:202
+check @ sendMessage.js:16
+(anonymous) @ dev-server.js:4
+emit @ events.js:95
+reloadApp @ parseURL.js:36
+warnings @ index.js:230
+(anonymous) @ socket.js:18
+client.onmessage @ WebSocketClient.js:5
+Show 26 more frames
+Show less
+DonorService.js:6 
+        
+        
+       GET http://localhost:8090/donor/1 500 (Internal Server Error)
+dispatchXhrRequest @ xhr.js:209
+xhr @ adapters.js:77
+dispatchRequest @ buildFullPath.js:21
+_request @ Axios.js:113
+request @ isCancel.js:5
+Axios.<computed> @ Axios.js:140
+wrap @ HttpStatusCode.js:44
+viewDonorById @ DonorService.js:6
+fetchDonorData @ DonorProfile.js:21
+(anonymous) @ DonorProfile.js:33
+commitHookEffectListMount @ react-dom.development.js:23096
+commitPassiveMountOnFiber @ react-dom.development.js:24871
+commitPassiveMountEffects_complete @ react-dom.development.js:24835
+commitPassiveMountEffects_begin @ react-dom.development.js:24824
+commitPassiveMountEffects @ react-dom.development.js:24813
+flushPassiveEffectsImpl @ react-dom.development.js:26987
+flushPassiveEffects @ react-dom.development.js:26931
+commitRootImpl @ react-dom.development.js:26883
+commitRoot @ react-dom.development.js:26629
+performSyncWorkOnRoot @ react-dom.development.js:26063
+flushSyncCallbacks @ react-dom.development.js:11994
+flushSync @ react-dom.development.js:26152
+scheduleRefresh @ react-dom.development.js:27743
+(anonymous) @ react-refresh-runtime.development.js:250
+performReactRefresh @ react-refresh-runtime.development.js:241
+(anonymous) @ RefreshUtils.js:54
+setTimeout (async)
+enqueueUpdate @ RefreshUtils.js:51
+executeRuntime @ RefreshUtils.js:200
+$ReactRefreshModuleRuntime$ @ main.a91d32258cad9c56d948.hot-update.js:249
+./src/components/DonorProfile.js @ main.a91d32258cad9c56d948.hot-update.js:262
+options.factory @ hot module replacement:359
+__webpack_require__ @ utils.js:707
+_requireSelf @ hot module replacement:57
+apply @ jsonp chunk loading:400
+(anonymous) @ hot module replacement:298
+internalApply @ hot module replacement:296
+(anonymous) @ hot module replacement:233
+waitForBlockingPromises @ hot module replacement:188
+(anonymous) @ hot module replacement:231
+Promise.then (async)
+(anonymous) @ hot module replacement:230
+Promise.then (async)
+(anonymous) @ hot module replacement:211
+Promise.then (async)
+hotCheck @ hot module replacement:202
+check @ sendMessage.js:16
+(anonymous) @ dev-server.js:4
+emit @ events.js:95
+reloadApp @ parseURL.js:36
+warnings @ index.js:230
+(anonymous) @ socket.js:18
+client.onmessage @ WebSocketClient.js:5
+Show 33 more frames
+Show less
+DonorProfile.js:29 Fetch error: AxiosError {message: 'Request failed with status code 500', name: 'AxiosError', code: 'ERR_BAD_RESPONSE', config: {…}, request: XMLHttpRequest, …}
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import DonorService from '../services/DonorService';
+
+
+function DonorProfile() {
+  const [user, setUser] = useState({
+    id: '',
+    name: '',
+    newName: '',
+    password: '',
+    newPassword: '',
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchDonorData = async () => {
+      try {
+        const storedUser = JSON.parse(sessionStorage.getItem('user'));
+        if (storedUser) {
+          const userData = await DonorService.viewDonorById(storedUser.id);
+          setUser({
+            ...storedUser,
+            name:storedUser.name,
+            email:storedUser.email,
+          });
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+      }
+    };
+
+    fetchDonorData();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+
+  const handleUpdateName = async (e) => {
+    e.preventDefault();
+
+    try {
+      await DonorService.updateDonorNameById(user.id, user.newName);
+      setUser((prevUser) => ({
+        ...prevUser,
+        name: user.newName,
+        newName: '',
+      }));
+      alert('Name updated successfully');
+    } catch (error) {
+      console.error('Update error:', error);
+    }
+  };
+
+  const handleUpdatePassword = async (e) => {
+    e.preventDefault();
+
+    try {
+      await DonorService.updateDonorPasswordById(user.id, user.newPassword);
+      setUser((prevUser) => ({
+        ...prevUser,
+        newPassword: '',
+      }));
+      alert('Password updated successfully');
+    } catch (error) {
+      console.error('Update error:', error);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    try {
+      await DonorService.deleteDonorById(user.id);
+      sessionStorage.clear();
+      alert('Account deleted successfully');
+      navigate('/login');
+    } catch (error) {
+      console.error('Deletion error:', error);
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    navigate('/login');
+  };
+
+  return (
+    <div>
+      <h1 className="Heading">Donor Profile</h1>
+      <hr />
+      <div className="detail">
+        <h2>Name: {user.name}</h2>
+        <h2>Email id: {user.email}</h2>
+      </div>
+      <form onSubmit={handleUpdateName}>
+        <label>
+          New Name:
+          <input
+            type="text"
+            name="newName"
+            value={user.newName}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Update Name</button>
+      </form>
+      <form onSubmit={handleUpdatePassword}>
+        <label>
+          New Password:
+          <input
+            type="password"
+            name="newPassword"
+            value={user.newPassword}
+            onChange={handleChange}
+          />
+        </label>
+        <button type="submit">Update Password</button>
+      </form>
+      <div className="button-container">
+        <button onClick={handleDeleteAccount} className="delete-account">
+          Delete Account
+        </button>
+        <button onClick={handleLogout} className="logbutton">
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default DonorProfile;

@@ -1,2 +1,26 @@
-'http://localhost:8090/donor/email?id=1&newEmail=jj%40gmail.com'
-'http://localhost:8090/donor/name?id=1&newName=jj'
+import { axiosInstance } from "./axios-http-client";
+const API_URL = 'http://localhost:8090/';
+
+class DonorService {
+  viewDonorById(id) {
+    return axiosInstance.get(`${API_URL}donor/id?id=${encodeURIComponent(id)}`);
+  }
+
+  updateDonorNameById(id, newName) {
+    return axiosInstance.patch(`${API_URL}donor/${id}/name`, { id, newName });
+  }
+
+  updateDonorEmailById(id, newEmail) {
+    return axiosInstance.patch(`${API_URL}donor/${id}/email`, { id, newEmail });
+  }
+
+  updateDonorPasswordById(id, newPassword) {
+    return axiosInstance.patch(`${API_URL}donor/${id}/password`, { id, newPassword });
+  }
+
+  deleteDonorById(id) {
+    return axiosInstance.delete(`${API_URL}donor/${id}`);
+  }
+}
+
+export default new DonorService();

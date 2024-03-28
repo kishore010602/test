@@ -1,29 +1,14 @@
-const handleUpdateName = async (e) => {
-  e.preventDefault();
-
-  try {
-    const storedUser = JSON.parse(sessionStorage.getItem('user'));
-    const response = await donorService.updateDonorNameById(storedUser.id, user.newName);
-    
-    if (response.status === 200) {
-      // Update the user name in session storage
-      const updatedUser = { ...storedUser, name: user.newName };
-      sessionStorage.setItem('user', JSON.stringify(updatedUser));
-
-      // Update the user name in state
-      setUser((prevUser) => ({
-        ...prevUser,
-        name: user.newName,
-        newName: '', // Clear the newName field
-      }));
-
-      alert('Name updated successfully');
-    } else {
-      console.error('Update error:', response.statusText);
-      alert('Failed to update name');
+   @PatchMapping("donor/name")
+    public Donor updateDonorName(Integer id, String newName) throws DonorExceptions {
+        return this.donorService.updateDonorNameById(id, newName);
     }
-  } catch (error) {
-    console.error('Update error:', error);
-    alert('Failed to update name');
-  }
-};
+
+    @PatchMapping("donor/email")
+    public Donor updateDonorEmail(Integer id, String newEmail) throws DonorExceptions {
+        return this.donorService.updateDonorEmailById(id, newEmail);
+    }
+
+    @PatchMapping("donor/password")
+    public Donor updateDonorPassword(Integer id, @RequestBody DonorLoginDto donorLoginDto) throws DonorExceptions {
+        return this.donorService.updateDonorPasswordById(id, donorLoginDto.getPassword());
+    }

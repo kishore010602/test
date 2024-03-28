@@ -1,1 +1,2 @@
 'http://localhost:8090/donor/email?id=1&newEmail=jj%40gmail.com'
+'http://localhost:8090/donor/name?id=1&newName=jj'

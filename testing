@@ -1,20 +1,26 @@
-const handleUpdateName = (e) => {
-  e.preventDefault();
-
-  donorService.updateDonorNameById(user.id, user.newName)
-    .then(() => {
-      // Update session storage
-      const storedUser = JSON.parse(sessionStorage.getItem('user'));
-      sessionStorage.setItem('user', JSON.stringify({ ...storedUser, name: user.newName }));
-
-      setUser((prevUser) => ({
-        ...prevUser,
-        name: user.newName,
-        newName: '',
-      }));
-      alert('Name updated successfully');
-    })
-    .catch((error) => {
-      console.error('Update error:', error);
-    });
-};
+profile:1 Access to XMLHttpRequest at 'http://localhost:8090/donor//name' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+DonorProfile.js:62 Update error: AxiosError {message: 'Network Error', name: 'AxiosError', code: 'ERR_NETWORK', config: {…}, request: XMLHttpRequest, …}
+(anonymous) @ DonorProfile.js:62
+Promise.catch (async)
+handleUpdateName @ DonorProfile.js:60
+callCallback @ react-dom.development.js:4164
+invokeGuardedCallbackDev @ react-dom.development.js:4213
+invokeGuardedCallback @ react-dom.development.js:4277
+invokeGuardedCallbackAndCatchFirstError @ react-dom.development.js:4291
+executeDispatch @ react-dom.development.js:9041
+processDispatchQueueItemsInOrder @ react-dom.development.js:9073
+processDispatchQueue @ react-dom.development.js:9086
+dispatchEventsForPlugins @ react-dom.development.js:9097
+(anonymous) @ react-dom.development.js:9288
+batchedUpdates$1 @ react-dom.development.js:26140
+batchedUpdates @ react-dom.development.js:3991
+dispatchEventForPluginEventSystem @ react-dom.development.js:9287
+dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay @ react-dom.development.js:6465
+dispatchEvent @ react-dom.development.js:6457
+dispatchDiscreteEvent @ react-dom.development.js:6430
+Show 15 more frames
+Show less
+DonorService.js:10 
+        
+        
+       PATCH http://localhost:8090/donor//name net::ERR_FAILED

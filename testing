@@ -1,51 +1,65 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-void formatRupee(unsigned long long num, char *result) {
-    char numStr[20], temp[25];
-    int len, i, j, count;
+// Function to format the number according to Indian currency system
+char* formatRupee(unsigned long long num) {
+    char* result = (char*)malloc(40 * sizeof(char)); // Allocate enough space for the formatted string
+    char intermediate[40] = {0}; // Intermediate string for holding the reverse formatted number
+    int i = 0, counter = 0;
 
-    // Convert the number to a string
-    sprintf(numStr, "%llu", num);
-    len = strlen(numStr);
-
-    // Copy "Rs." prefix to the result
-    strcpy(result, "Rs.");
-    
-    // Process the string from the end for Indian currency format
-    for (i = len - 1, j = strlen(result), count = 0; i >= 0; i--, j--) {
-        result[j] = numStr[i];
-        if (i == len - 3) { // After the first three digits, place comma after every 2 digits
-            count = 0;
-        }
-        if (++count == 3 && i != 0) {
-            result[--j] = ',';
-            count = 0;
-        }
+    // Handle the case for 0 explicitly
+    if (num == 0) {
+        strcpy(result, "Rs.0.00");
+        return result;
     }
 
-    // Ensure the string is null-terminated
-    result[strlen(result)] = '\0';
+    // Convert number to string in reverse order with commas
+    while (num > 0) {
+        if (counter == 3) {
+            intermediate[i++] = ',';
+            counter = 0;
+        } else if (counter == 2 && i > 3) { // After the first three digits, insert comma after every 2 digits
+            intermediate[i++] = ',';
+            counter = 0;
+        }
+        
+        intermediate[i++] = (num % 10) + '0';
+        num /= 10;
+        counter++;
+    }
 
-    // Append ".00" for paisa
-    strcat(result, ".00");
+    // Reverse the string to get the correct order
+    int len = strlen(intermediate);
+    char formattedNumber[40] = {0};
+    for (int j = 0; j < len; j++) {
+        formattedNumber[j] = intermediate[len - j - 1];
+    }
+
+    // Format the final string with "Rs." prefix and ".00" suffix
+    sprintf(result, "Rs.%s.00", formattedNumber);
+
+    return result;
 }
 
 int main() {
-    char formattedValue[30];
-    
-    formatRupee(1500000, formattedValue);
-    printf("%s\n", formattedValue);
-    
-    formatRupee(5004, formattedValue);
-    printf("%s\n", formattedValue);
-    
-    formatRupee(155, formattedValue);
-    printf("%s\n", formattedValue);
-    
-    formatRupee(14500000, formattedValue);
-    printf("%s\n", formattedValue);
-    
+    char* formatted;
+
+    formatted = formatRupee(1500000);
+    printf("%s\n", formatted);
+    free(formatted);
+
+    formatted = formatRupee(5004);
+    printf("%s\n", formatted);
+    free(formatted);
+
+    formatted = formatRupee(155);
+    printf("%s\n", formatted);
+    free(formatted);
+
+    formatted = formatRupee(14500000);
+    printf("%s\n", formatted);
+    free(formatted);
+
     return 0;
 }

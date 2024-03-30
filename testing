@@ -1,11 +1,51 @@
-Comma separated currency:
-Comma separators are used while writing the Indian currency value. The Indian numbering
-system groups the rightmost three digits together (until the hundreds place), and thereafter
-groups by sets of two digits.
-Write a function in C format-rupee that takes a non-negative number and returns the comma
-separated currency value. Your function should convert the number to a string, add commas,
-add a prefix “Rs.”, and add decimals for paisa “.00”.
-format-rupee(1500000) should return Rs.15,00,000.00
-format-rupee(5004) should return Rs.5,004.00
-format-rupee(155) should return Rs.155.00
-format-rupee(14500000) should return Rs.1,45,00,000.00
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void formatRupee(unsigned long long num, char *result) {
+    char numStr[20], temp[25];
+    int len, i, j, count;
+
+    // Convert the number to a string
+    sprintf(numStr, "%llu", num);
+    len = strlen(numStr);
+
+    // Copy "Rs." prefix to the result
+    strcpy(result, "Rs.");
+    
+    // Process the string from the end for Indian currency format
+    for (i = len - 1, j = strlen(result), count = 0; i >= 0; i--, j--) {
+        result[j] = numStr[i];
+        if (i == len - 3) { // After the first three digits, place comma after every 2 digits
+            count = 0;
+        }
+        if (++count == 3 && i != 0) {
+            result[--j] = ',';
+            count = 0;
+        }
+    }
+
+    // Ensure the string is null-terminated
+    result[strlen(result)] = '\0';
+
+    // Append ".00" for paisa
+    strcat(result, ".00");
+}
+
+int main() {
+    char formattedValue[30];
+    
+    formatRupee(1500000, formattedValue);
+    printf("%s\n", formattedValue);
+    
+    formatRupee(5004, formattedValue);
+    printf("%s\n", formattedValue);
+    
+    formatRupee(155, formattedValue);
+    printf("%s\n", formattedValue);
+    
+    formatRupee(14500000, formattedValue);
+    printf("%s\n", formattedValue);
+    
+    return 0;
+}
